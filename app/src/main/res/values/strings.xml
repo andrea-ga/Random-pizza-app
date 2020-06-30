@@ -8,4 +8,6 @@
     <string name="switch_on">Dark</string>
     <string name="switch_off">Light</string>
     <string name="logo_description">App logo</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

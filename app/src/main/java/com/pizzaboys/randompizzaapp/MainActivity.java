@@ -1,13 +1,23 @@
 package com.pizzaboys.randompizzaapp;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.Switch;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.Collection;
 import java.util.HashSet;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private DrawerLayout drawer;
 
     private Collection<Ingredient> ingredients = new HashSet<>();
     private Collection<Pizza> pizzas = new HashSet<>();
@@ -16,6 +26,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        drawer = findViewById(R.id.drawer_layout);
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer,
+                toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
 
         createIngredientsSet();
         createPizzaSet();
@@ -58,5 +82,15 @@ public class MainActivity extends AppCompatActivity {
         pizzas.add(quattroFormaggi);
         Pizza vegetariana = new Pizza("Vegetariana");
         pizzas.add(vegetariana);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        switch(item.getItemId()){
+            //CREATE FRAGMENTS
+        }
+
+        return true;
     }
 }
