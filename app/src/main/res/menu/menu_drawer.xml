@@ -24,8 +24,9 @@
             <item
                 android:id="@+id/app_bar_switch"
                 android:icon="@drawable/ic_invert_colors"
-                android:title="@string/menu_dark_theme" />
-                <!-- INSERT SWITCH LAYOUT -->
+                android:title="@string/menu_dark_theme"
+                app:actionLayout="@layout/switch_item"
+                app:showAsAction="always" />
         </menu>
     </item>
 
