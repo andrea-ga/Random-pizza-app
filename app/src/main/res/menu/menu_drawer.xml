@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="@string/menu_message">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_traditional"
+                    android:icon="@drawable/ic_pizza"
+                    android:title="@string/menu_traditional" />
+                <item
+                    android:id="@+id/nav_360"
+                    android:icon="@drawable/ic_360"
+                    android:title="@string/menu_360" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="@string/menu_settings">
+        <menu>
+            <item
+                android:id="@+id/app_bar_switch"
+                android:icon="@drawable/ic_invert_colors"
+                android:title="@string/menu_dark_theme" />
+                <!-- INSERT SWITCH LAYOUT -->
+        </menu>
+    </item>
+
+</menu>
