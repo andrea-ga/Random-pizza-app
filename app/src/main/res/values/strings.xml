@@ -18,4 +18,12 @@
     <string name="radio_text_4">4</string>
     <string name="filters_title">Add some filters: </string>
     <string name="filter_add">ADD</string>
+    <string name="popup_filters_title">Select categories that will not be showed:</string>
+    <string name="popup_filters_vegetali">Vegetali</string>
+    <string name="popup_filters_salumi">Salumi&amp;co</string>
+    <string name="popup_filters_pesce">Pesce</string>
+    <string name="popup_filters_formaggi">Formaggi</string>
+    <string name="popup_filters_frutta">Frutta</string>
+    <string name="popup_filters_spezie">Spezie</string>
+    <string name="popup_filters_salse">Salse</string>
 </resources>

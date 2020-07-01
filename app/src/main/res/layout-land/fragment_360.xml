@@ -146,6 +146,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
+        android:onClick="filtersPopUp"
         android:text="@string/filter_add"
         app:backgroundTint="@color/colorAccent"
         app:layout_constraintBaseline_toBaselineOf="@+id/button2"

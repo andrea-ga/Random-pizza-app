@@ -8,15 +8,20 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.CompoundButton;
+import android.widget.PopupWindow;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.chip.Chip;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Collection;
@@ -30,6 +35,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private Collection<Ingredient> ingredients = new HashSet<>();
     private Collection<Pizza> pizzas = new HashSet<>();
+
+    private boolean[] filters = new boolean[7];
+    private Chip filter_vegetali, filter_salumi, filter_formaggi, filter_pesce, filter_salse,
+                    filter_frutta, filter_spezie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -276,6 +285,56 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 textView1.setText(ingredient1_name);
                 break;
         }
+
+    }
+
+    public void filtersPopUp(View view){
+        View popupView = getLayoutInflater().inflate(R.layout.popup_layout, null);
+
+        PopupWindow popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.WRAP_CONTENT);
+
+        filter_vegetali = (Chip) popupView.findViewById(R.id.chip_vegetali);
+        filter_vegetali.setChecked(filters[0]);
+        filter_pesce = (Chip) popupView.findViewById(R.id.chip_pesce);
+        filter_pesce.setChecked(filters[1]);
+        filter_formaggi = (Chip) popupView.findViewById(R.id.chip_formaggi);
+        filter_formaggi.setChecked(filters[2]);
+        filter_salumi = (Chip) popupView.findViewById(R.id.chip_salumi);
+        filter_salumi.setChecked(filters[3]);
+        filter_salse = (Chip) popupView.findViewById(R.id.chip_salse);
+        filter_salse.setChecked(filters[4]);
+        filter_frutta = (Chip) popupView.findViewById(R.id.chip_frutta);
+        filter_frutta.setChecked(filters[5]);
+        filter_spezie = (Chip) popupView.findViewById(R.id.chip_spezie);
+        filter_spezie.setChecked(filters[6]);
+
+
+        popupWindow.setFocusable(true);
+
+        popupWindow.setBackgroundDrawable(new ColorDrawable());
+
+        int[] location = new int[2];
+
+        view.getLocationOnScreen(location);
+
+        PopupWindow.OnDismissListener onDismissListener = new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                filters[0] = filter_vegetali.isChecked();
+                filters[1] = filter_pesce.isChecked();
+                filters[2] = filter_formaggi.isChecked();
+                filters[3] = filter_salumi.isChecked();
+                filters[4] = filter_salse.isChecked();
+                filters[5] = filter_frutta.isChecked();
+                filters[6] = filter_spezie.isChecked();
+            }
+        };
+
+        popupWindow.setOnDismissListener(onDismissListener);
+
+        popupWindow.showAtLocation(view, Gravity.NO_GRAVITY, location[0], location[1] +
+                view.getHeight());
 
     }
 }
