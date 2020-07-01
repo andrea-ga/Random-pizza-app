@@ -25,6 +25,7 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -34,11 +35,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Switch switch_theme;
 
     private List<Ingredient> ingredients = new ArrayList<>();
+    private List<Ingredient> filtered_ingredients = new ArrayList<>();
+
     private List<Pizza> pizzas = new ArrayList<>();
 
     private boolean[] filters = new boolean[7];
     private Chip filter_vegetali, filter_salumi, filter_formaggi, filter_pesce, filter_salse,
-                    filter_frutta, filter_spezie;
+            filter_frutta, filter_spezie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,12 +67,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch_theme = menuItem.getActionView().findViewById(R.id.drawer_switch);
 
-        //SEE IF THERE IS NIGHT MODE BY DEFAULT
+            //SEE IF THERE IS NIGHT MODE BY DEFAULT
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_UNSPECIFIED) {
             switch_theme.setChecked(true);
         }
 
-        //SET LISTENER
+            //SET LISTENER
         switch_theme.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -123,6 +126,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ingredients.add(zucchine);
         Ingredient panna = new Ingredient("Panna", "Salse");
         ingredients.add(panna);
+
+        filtered_ingredients.addAll(ingredients);
     }
 
     public void createPizzaList() {
@@ -165,19 +170,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void generatePizza(View view) {
-        Pizza p_show = null;
+        Pizza p_show;
         String pizza_name;
         int size = pizzas.size();
         int item = new Random().nextInt(size);
-        int i = 0;
 
-        for (Pizza p : pizzas) {
-            if (i == item) {
-                p_show = p;
-                break;
-            }
-            i++;
-        }
+        p_show = pizzas.get(item);
 
         if (p_show != null) {
             pizza_name = p_show.getName();
@@ -191,32 +189,96 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void generate360(View view) {
         Random r1, r2, r3, r4;
         int random_number1, random_number2, random_number3, random_number4;
-        Ingredient ingredient1 = null, ingredient2 = null, ingredient3 = null, ingredient4 = null;
+        Ingredient ingredient1, ingredient2, ingredient3, ingredient4;
         String ingredient1_name = "", ingredient2_name = "", ingredient3_name = "", ingredient4_name = "";
+
+        if (ingredients.size() != filtered_ingredients.size()) {
+            filtered_ingredients.removeAll(filtered_ingredients);
+            filtered_ingredients.addAll(ingredients);
+        }
 
         r1 = new Random();
         r2 = new Random();
         r3 = new Random();
         r4 = new Random();
 
-        random_number1 = r1.nextInt(ingredients.size());
+        if (filters[0]) {
+            for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
+                Ingredient ingredient = iterator.next();
+                if (ingredient.getCategory() != null && ingredient.getCategory().equals("Verdure")) {
+                    iterator.remove();
+                }
+            }
+        }
+        if (filters[1]) {
+            for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
+                Ingredient ingredient = iterator.next();
+                if (ingredient.getCategory() != null && ingredient.getCategory().equals("Salumi")) {
+                    iterator.remove();
+                }
+            }
+        }
+        if (filters[2]) {
+            for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
+                Ingredient ingredient = iterator.next();
+                if (ingredient.getCategory() != null && ingredient.getCategory().equals("Formaggi")) {
+                    iterator.remove();
+                }
+            }
+        }
+        if (filters[3]) {
+            for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
+                Ingredient ingredient = iterator.next();
+                if (ingredient.getCategory() != null && ingredient.getCategory().equals("Pesce")) {
+                    iterator.remove();
+                }
+            }
+        }
+        if (filters[4]) {
+            for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
+                Ingredient ingredient = iterator.next();
+                if (ingredient.getCategory() != null && ingredient.getCategory().equals("Salse")) {
+                    iterator.remove();
+                }
+            }
+        }
+        if (filters[5]) {
+            for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
+                Ingredient ingredient = iterator.next();
+                if (ingredient.getCategory() != null && ingredient.getCategory().equals("Frutta")) {
+                    iterator.remove();
+                }
+            }
+        }
+        if (filters[6]) {
+            for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
+                Ingredient ingredient = iterator.next();
+                if (ingredient.getCategory() != null && ingredient.getCategory().equals("Spezie")) {
+                    iterator.remove();
+                }
+            }
+        }
+
+
+        random_number1 = r1.nextInt(filtered_ingredients.size());
 
         do {
-            random_number2 = r2.nextInt(ingredients.size());
+            random_number2 = r2.nextInt(filtered_ingredients.size());
         } while (random_number2 == random_number1);
 
         do {
-            random_number3 = r3.nextInt(ingredients.size());
+            random_number3 = r3.nextInt(filtered_ingredients.size());
         } while (random_number3 == random_number1 || random_number3 == random_number2);
 
         do {
-            random_number4 = r4.nextInt(ingredients.size());
-        } while (random_number4 == random_number3 || random_number4 == random_number2 || random_number4 == random_number1);
+            random_number4 = r4.nextInt(filtered_ingredients.size());
+        } while (random_number4 == random_number3 || random_number4 == random_number2 ||
+                random_number4 == random_number1);
 
-        ingredient1 = ingredients.get(random_number1);
-        ingredient2 = ingredients.get(random_number2);
-        ingredient3 = ingredients.get(random_number3);
-        ingredient4 = ingredients.get(random_number4);
+        ingredient1 = filtered_ingredients.get(random_number1);
+        ingredient2 = filtered_ingredients.get(random_number2);
+        ingredient3 = filtered_ingredients.get(random_number3);
+        ingredient4 = filtered_ingredients.get(random_number4);
 
         if (ingredient1 != null)
             ingredient1_name = ingredient1.getName();
@@ -254,7 +316,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    public void filtersPopUp(View view){
+    public void filtersPopUp(View view) {
+
         View popupView = getLayoutInflater().inflate(R.layout.popup_layout, null);
 
         PopupWindow popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.MATCH_PARENT,
@@ -303,4 +366,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 view.getHeight());
 
     }
+
 }
