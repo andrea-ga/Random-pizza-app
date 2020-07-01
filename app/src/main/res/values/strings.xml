@@ -16,7 +16,6 @@
     <string name="radio_text_2">2</string>
     <string name="radio_text_3">3</string>
     <string name="radio_text_4">4</string>
-    <string name="filters_title">Add some filters:</string>
-    <string name="filters_off">FILTERS OFF</string>
-    <string name="filters_on">FILTERS ON</string>
+    <string name="filters_title">Add some filters: </string>
+    <string name="filter_add">ADD</string>
 </resources>
