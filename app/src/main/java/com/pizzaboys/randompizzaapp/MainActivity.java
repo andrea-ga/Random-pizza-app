@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private List<Pizza> pizzas = new ArrayList<>();
 
     private boolean[] filters = new boolean[7];
-    private Chip filter_vegetali, filter_salumi, filter_formaggi, filter_pesce, filter_salse,
+    private Chip filter_vegetali, filter_pesce, filter_formaggi,  filter_salumi, filter_salse,
             filter_frutta, filter_spezie;
 
     @Override
@@ -102,30 +102,59 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void createIngredientsList() {
-        Ingredient patateLesse = new Ingredient("Patate lesse");
-        ingredients.add(patateLesse);
-        Ingredient patatineFritte = new Ingredient("Patatine fritte");
-        ingredients.add(patatineFritte);
-        Ingredient pomodoro = new Ingredient("Pomodoro");
-        ingredients.add(pomodoro);
-        Ingredient funghi = new Ingredient("Funghi");
-        ingredients.add(funghi);
-        Ingredient pesto = new Ingredient("Pesto", "Salse");
-        ingredients.add(pesto);
-        Ingredient peperoni = new Ingredient("Peperoni");
-        ingredients.add(peperoni);
-        Ingredient salsiccia = new Ingredient("Salsiccia");
-        ingredients.add(salsiccia);
-        Ingredient wurstel = new Ingredient("Wurstel");
-        ingredients.add(wurstel);
-        Ingredient olive = new Ingredient("Olive", "Verdure");
+        Ingredient olive = new Ingredient(getString(R.string.olive),getString(R.string.vegetali));
         ingredients.add(olive);
-        Ingredient tonno = new Ingredient("Tonno");
-        ingredients.add(tonno);
-        Ingredient zucchine = new Ingredient("Zucchine", "Verdure");
+        Ingredient zucchine = new Ingredient(getString(R.string.zucchine),getString(R.string.vegetali));
         ingredients.add(zucchine);
-        Ingredient panna = new Ingredient("Panna", "Salse");
+        Ingredient melanzane = new Ingredient(getString(R.string.melanzane),getString(R.string.vegetali));
+        ingredients.add(melanzane);
+        Ingredient peperoni = new Ingredient(getString(R.string.peperoni),getString(R.string.vegetali));
+        ingredients.add(peperoni);
+        Ingredient speck = new Ingredient(getString(R.string.speck),getString(R.string.salumi));
+        ingredients.add(speck);
+        Ingredient prosciutto_cotto = new Ingredient(getString(R.string.prosciutto_cotto),getString(R.string.salumi));
+        ingredients.add(prosciutto_cotto);
+        Ingredient prosciutto_crudo = new Ingredient(getString(R.string.prosciutto_crudo),getString(R.string.salumi));
+        ingredients.add(prosciutto_crudo);
+        Ingredient salame_piccante = new Ingredient(getString(R.string.salame_piccante),getString(R.string.salumi));
+        ingredients.add(salame_piccante);
+        Ingredient mozzarella_di_bufala = new Ingredient(getString(R.string.mozzarella_di_bufala),getString(R.string.formaggi));
+        ingredients.add(mozzarella_di_bufala);
+        Ingredient scamorza = new Ingredient(getString(R.string.scamorza),getString(R.string.formaggi));
+        ingredients.add(scamorza);
+        Ingredient taleggio = new Ingredient(getString(R.string.taleggio),getString(R.string.formaggi));
+        ingredients.add(taleggio);
+        Ingredient brie = new Ingredient(getString(R.string.brie),getString(R.string.formaggi));
+        ingredients.add(brie);
+        Ingredient salmone = new Ingredient(getString(R.string.salmone),getString(R.string.pesce));
+        ingredients.add(salmone);
+        Ingredient tonno = new Ingredient(getString(R.string.tonno),getString(R.string.pesce));
+        ingredients.add(tonno);
+        Ingredient frutti_di_mare = new Ingredient(getString(R.string.frutti_di_mare),getString(R.string.pesce));
+        ingredients.add(frutti_di_mare);
+        Ingredient acciughe = new Ingredient(getString(R.string.acciughe),getString(R.string.pesce));
+        ingredients.add(acciughe);
+        Ingredient pesto_alla_genovese = new Ingredient(getString(R.string.pesto_alla_genovese),getString(R.string.salse));
+        ingredients.add(pesto_alla_genovese);
+        Ingredient panna = new Ingredient(getString(R.string.panna),getString(R.string.salse));
         ingredients.add(panna);
+        Ingredient pesto_di_pistacchi = new Ingredient(getString(R.string.pesto_di_pistacchi),getString(R.string.salse));
+        ingredients.add(pesto_di_pistacchi);
+        Ingredient pere = new Ingredient(getString(R.string.pere),getString(R.string.frutta));
+        ingredients.add(pere);
+        Ingredient mele = new Ingredient(getString(R.string.mele),getString(R.string.frutta));
+        ingredients.add(mele);
+        Ingredient ananas = new Ingredient(getString(R.string.ananas),getString(R.string.frutta));
+        ingredients.add(ananas);
+        Ingredient origano = new Ingredient(getString(R.string.origano),getString(R.string.spezie));
+        ingredients.add(origano);
+        Ingredient rosmarino = new Ingredient(getString(R.string.rosmarino),getString(R.string.spezie));
+        ingredients.add(rosmarino);
+        Ingredient aglio = new Ingredient(getString(R.string.aglio),getString(R.string.spezie));
+        ingredients.add(aglio);
+        Ingredient peperoncino = new Ingredient(getString(R.string.peperoncino),getString(R.string.spezie));
+        ingredients.add(peperoncino);
+
 
         filtered_ingredients.addAll(ingredients);
     }
@@ -205,7 +234,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (filters[0]) {
             for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
                 Ingredient ingredient = iterator.next();
-                if (ingredient.getCategory() != null && ingredient.getCategory().equals("Verdure")) {
+                if (ingredient.getCategory() != null && ingredient.getCategory().equals(getString(R.string.vegetali))) {
                     iterator.remove();
                 }
             }
@@ -213,7 +242,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (filters[1]) {
             for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
                 Ingredient ingredient = iterator.next();
-                if (ingredient.getCategory() != null && ingredient.getCategory().equals("Salumi")) {
+                if (ingredient.getCategory() != null && ingredient.getCategory().equals(getString(R.string.pesce))) {
                     iterator.remove();
                 }
             }
@@ -221,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (filters[2]) {
             for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
                 Ingredient ingredient = iterator.next();
-                if (ingredient.getCategory() != null && ingredient.getCategory().equals("Formaggi")) {
+                if (ingredient.getCategory() != null && ingredient.getCategory().equals(getString(R.string.formaggi))) {
                     iterator.remove();
                 }
             }
@@ -229,7 +258,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (filters[3]) {
             for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
                 Ingredient ingredient = iterator.next();
-                if (ingredient.getCategory() != null && ingredient.getCategory().equals("Pesce")) {
+                if (ingredient.getCategory() != null && ingredient.getCategory().equals(getString(R.string.salumi))) {
                     iterator.remove();
                 }
             }
@@ -237,7 +266,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (filters[4]) {
             for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
                 Ingredient ingredient = iterator.next();
-                if (ingredient.getCategory() != null && ingredient.getCategory().equals("Salse")) {
+                if (ingredient.getCategory() != null && ingredient.getCategory().equals(getString(R.string.salse))) {
                     iterator.remove();
                 }
             }
@@ -245,7 +274,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (filters[5]) {
             for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
                 Ingredient ingredient = iterator.next();
-                if (ingredient.getCategory() != null && ingredient.getCategory().equals("Frutta")) {
+                if (ingredient.getCategory() != null && ingredient.getCategory().equals(getString(R.string.frutta))) {
                     iterator.remove();
                 }
             }
@@ -253,7 +282,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (filters[6]) {
             for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
                 Ingredient ingredient = iterator.next();
-                if (ingredient.getCategory() != null && ingredient.getCategory().equals("Spezie")) {
+                if (ingredient.getCategory() != null && ingredient.getCategory().equals(getString(R.string.spezie))) {
                     iterator.remove();
                 }
             }
