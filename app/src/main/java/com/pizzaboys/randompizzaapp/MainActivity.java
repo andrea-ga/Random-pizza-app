@@ -10,14 +10,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -73,14 +76,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
         //END SWITCH_THEME
 
+        if(savedInstanceState == null){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new PizzaFragment()).commit();
 
-
-
-
-
-
-
-
+            navigationView.setCheckedItem(R.id.nav_traditional);
+        }
 
         createIngredientsSet();
         createPizzaSet();
@@ -129,6 +130,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         switch (item.getItemId()) {
+            case R.id.nav_traditional:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new PizzaFragment()).commit();
+                break;
             //CREATE FRAGMENTS
         }
 
@@ -142,5 +147,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else{
             super.onBackPressed();
         }
+    }
+
+    public void generatePizza(View view){
+        Pizza p_show = null;
+        String pizza_name;
+        int size = pizzas.size();
+        int item = new Random().nextInt(size);
+        int i = 0;
+
+        for(Pizza p : pizzas){
+            if(i == item){
+                p_show = p;
+                break;
+            }
+            i++;
+        }
+
+        if(p_show!=null) {
+            pizza_name = p_show.getName();
+
+            TextView textView = findViewById(R.id.textView);
+            textView.setText(pizza_name);
+        }
+
     }
 }
