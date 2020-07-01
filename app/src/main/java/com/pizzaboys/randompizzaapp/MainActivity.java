@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,12 +55,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch_theme = menuItem.getActionView().findViewById(R.id.drawer_switch);
 
-            //SEE IF THERE IS NIGHT MODE BY DEFAULT
+        //SEE IF THERE IS NIGHT MODE BY DEFAULT
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_UNSPECIFIED) {
             switch_theme.setChecked(true);
         }
 
-            //SET LISTENER
+        //SET LISTENER
         switch_theme.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
         //END SWITCH_THEME
 
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new PizzaFragment()).commit();
 
@@ -134,41 +135,146 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new PizzaFragment()).commit();
                 break;
-            //CREATE FRAGMENTS
+            case R.id.nav_360:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new P360Fragment()).commit();
+                break;
         }
+
+        drawer.closeDrawer(GravityCompat.START);
 
         return true;
     }
 
     @Override
-    public void onBackPressed(){
-        if(drawer.isDrawerOpen(GravityCompat.START)){  //.END se il drawer si trova a destra
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {  //.END se il drawer si trova a destra
             drawer.closeDrawer(GravityCompat.START);   //same
-        } else{
+        } else {
             super.onBackPressed();
         }
     }
 
-    public void generatePizza(View view){
+    public void generatePizza(View view) {
         Pizza p_show = null;
         String pizza_name;
         int size = pizzas.size();
         int item = new Random().nextInt(size);
         int i = 0;
 
-        for(Pizza p : pizzas){
-            if(i == item){
+        for (Pizza p : pizzas) {
+            if (i == item) {
                 p_show = p;
                 break;
             }
             i++;
         }
 
-        if(p_show!=null) {
+        if (p_show != null) {
             pizza_name = p_show.getName();
 
             TextView textView = findViewById(R.id.textView);
             textView.setText(pizza_name);
+        }
+
+    }
+
+    public void generate360(View view) {
+        Random r1, r2, r3, r4;
+        int random_number1, random_number2, random_number3, random_number4;
+        Ingredient ingredient1 = null, ingredient2 = null, ingredient3 = null, ingredient4 = null;
+        String ingredient1_name = "", ingredient2_name = "", ingredient3_name = "", ingredient4_name = "";
+        int i = 0;
+
+        r1 = new Random();
+        r2 = new Random();
+        r3 = new Random();
+        r4 = new Random();
+
+        random_number1 = r1.nextInt(ingredients.size());
+
+        do {
+            random_number2 = r2.nextInt(ingredients.size());
+        } while (random_number2 == random_number1);
+
+        do {
+            random_number3 = r3.nextInt(ingredients.size());
+        } while (random_number3 == random_number1 || random_number3 == random_number2);
+
+        do {
+            random_number4 = r4.nextInt(ingredients.size());
+        } while (random_number4 == random_number3 || random_number4 == random_number2 || random_number4 == random_number1);
+
+        for (Ingredient in : ingredients) {
+            if (i == random_number1) {
+                ingredient1 = in;
+                break;
+            }
+            i++;
+        }
+
+        i = 0;
+
+        for (Ingredient in : ingredients) {
+            if (i == random_number2) {
+                ingredient2 = in;
+                break;
+            }
+            i++;
+        }
+
+        i = 0;
+
+        for (Ingredient in : ingredients) {
+            if (i == random_number3) {
+                ingredient3 = in;
+                break;
+            }
+            i++;
+        }
+
+        i = 0;
+
+        for (Ingredient in : ingredients) {
+            if (i == random_number4) {
+                ingredient4 = in;
+                break;
+            }
+            i++;
+        }
+
+        if (ingredient1 != null)
+            ingredient1_name = ingredient1.getName();
+        if (ingredient2 != null)
+            ingredient2_name = ingredient2.getName();
+        if (ingredient3 != null)
+            ingredient3_name = ingredient3.getName();
+        if (ingredient4 != null)
+            ingredient4_name = ingredient4.getName();
+
+
+        TextView textView1 = findViewById(R.id.textView3);
+        TextView textView2 = findViewById(R.id.textView4);
+        TextView textView3 = findViewById(R.id.textView5);
+        TextView textView4 = findViewById(R.id.textView6);
+
+        textView1.setText("");
+        textView2.setText("");
+        textView3.setText("");
+        textView4.setText("");
+
+        RadioGroup radioGroup = findViewById(R.id.radio_group);
+
+        switch (radioGroup.getCheckedRadioButtonId()) {
+            case R.id.radio_4:
+                textView4.setText(ingredient4_name);
+            case R.id.radio_3:
+                textView3.setText(ingredient3_name);
+            case R.id.radio_2:
+                textView2.setText(ingredient2_name);
+            case R.id.radio_1:
+                textView1.setText(ingredient1_name);
+                break;
         }
 
     }
