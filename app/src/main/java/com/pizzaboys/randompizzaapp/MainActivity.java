@@ -24,8 +24,8 @@ import android.widget.Toast;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     private Switch switch_theme;
 
-    private Collection<Ingredient> ingredients = new HashSet<>();
-    private Collection<Pizza> pizzas = new HashSet<>();
+    private List<Ingredient> ingredients = new ArrayList<>();
+    private List<Pizza> pizzas = new ArrayList<>();
 
     private boolean[] filters = new boolean[7];
     private Chip filter_vegetali, filter_salumi, filter_formaggi, filter_pesce, filter_salse,
@@ -93,12 +93,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.setCheckedItem(R.id.nav_traditional);
         }
 
-        createIngredientsSet();
-        createPizzaSet();
+        createIngredientsList();
+        createPizzaList();
 
     }
 
-    public void createIngredientsSet() {
+    public void createIngredientsList() {
         Ingredient patateLesse = new Ingredient("Patate lesse");
         ingredients.add(patateLesse);
         Ingredient patatineFritte = new Ingredient("Patatine fritte");
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ingredients.add(panna);
     }
 
-    public void createPizzaSet() {
+    public void createPizzaList() {
         Pizza margherita = new Pizza("Margherita");
         pizzas.add(margherita);
         Pizza marinara = new Pizza("Marinara");
@@ -193,7 +193,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int random_number1, random_number2, random_number3, random_number4;
         Ingredient ingredient1 = null, ingredient2 = null, ingredient3 = null, ingredient4 = null;
         String ingredient1_name = "", ingredient2_name = "", ingredient3_name = "", ingredient4_name = "";
-        int i = 0;
 
         r1 = new Random();
         r2 = new Random();
@@ -214,43 +213,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             random_number4 = r4.nextInt(ingredients.size());
         } while (random_number4 == random_number3 || random_number4 == random_number2 || random_number4 == random_number1);
 
-        for (Ingredient in : ingredients) {
-            if (i == random_number1) {
-                ingredient1 = in;
-                break;
-            }
-            i++;
-        }
-
-        i = 0;
-
-        for (Ingredient in : ingredients) {
-            if (i == random_number2) {
-                ingredient2 = in;
-                break;
-            }
-            i++;
-        }
-
-        i = 0;
-
-        for (Ingredient in : ingredients) {
-            if (i == random_number3) {
-                ingredient3 = in;
-                break;
-            }
-            i++;
-        }
-
-        i = 0;
-
-        for (Ingredient in : ingredients) {
-            if (i == random_number4) {
-                ingredient4 = in;
-                break;
-            }
-            i++;
-        }
+        ingredient1 = ingredients.get(random_number1);
+        ingredient2 = ingredients.get(random_number2);
+        ingredient3 = ingredients.get(random_number3);
+        ingredient4 = ingredients.get(random_number4);
 
         if (ingredient1 != null)
             ingredient1_name = ingredient1.getName();
