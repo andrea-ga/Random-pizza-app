@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private List<Pizza> pizzas = new ArrayList<>();
 
     private boolean[] filters = new boolean[7];
-    private Chip filter_vegetali, filter_pesce, filter_formaggi,  filter_salumi, filter_salse,
+    private Chip filter_vegetali, filter_pesce, filter_formaggi, filter_salumi, filter_salse,
             filter_frutta, filter_spezie;
 
     @Override
@@ -102,143 +102,143 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void createAllList() {
         //INGREDIENTS
-        Ingredient olive = new Ingredient(getString(R.string.olive),getString(R.string.vegetali));
+        Ingredient olive = new Ingredient(getString(R.string.olive), getString(R.string.vegetali));
         ingredients.add(olive);
-        Ingredient zucchine = new Ingredient(getString(R.string.zucchine),getString(R.string.vegetali));
+        Ingredient zucchine = new Ingredient(getString(R.string.zucchine), getString(R.string.vegetali));
         ingredients.add(zucchine);
-        Ingredient melanzane = new Ingredient(getString(R.string.melanzane),getString(R.string.vegetali));
+        Ingredient melanzane = new Ingredient(getString(R.string.melanzane), getString(R.string.vegetali));
         ingredients.add(melanzane);
-        Ingredient peperoni = new Ingredient(getString(R.string.peperoni),getString(R.string.vegetali));
+        Ingredient peperoni = new Ingredient(getString(R.string.peperoni), getString(R.string.vegetali));
         ingredients.add(peperoni);
-        Ingredient asparagi = new Ingredient(getString(R.string.asparagi),getString(R.string.vegetali));
+        Ingredient asparagi = new Ingredient(getString(R.string.asparagi), getString(R.string.vegetali));
         ingredients.add(asparagi);
-        Ingredient friarelli = new Ingredient(getString(R.string.friarelli),getString(R.string.vegetali));
+        Ingredient friarelli = new Ingredient(getString(R.string.friarelli), getString(R.string.vegetali));
         ingredients.add(friarelli);
-        Ingredient rucola = new Ingredient(getString(R.string.rucola),getString(R.string.vegetali));
+        Ingredient rucola = new Ingredient(getString(R.string.rucola), getString(R.string.vegetali));
         ingredients.add(rucola);
-        Ingredient carciofi = new Ingredient(getString(R.string.carciofi),getString(R.string.vegetali));
+        Ingredient carciofi = new Ingredient(getString(R.string.carciofi), getString(R.string.vegetali));
         ingredients.add(carciofi);
-        Ingredient funghi_porcini = new Ingredient(getString(R.string.funghi_porcini),getString(R.string.vegetali));
+        Ingredient funghi_porcini = new Ingredient(getString(R.string.funghi_porcini), getString(R.string.vegetali));
         ingredients.add(funghi_porcini);
-        Ingredient funghi_champignon = new Ingredient(getString(R.string.funghi_champignon),getString(R.string.vegetali));
+        Ingredient funghi_champignon = new Ingredient(getString(R.string.funghi_champignon), getString(R.string.vegetali));
         ingredients.add(funghi_champignon);
-        Ingredient zucca = new Ingredient(getString(R.string.zucca),getString(R.string.vegetali));
+        Ingredient zucca = new Ingredient(getString(R.string.zucca), getString(R.string.vegetali));
         ingredients.add(zucca);
-        Ingredient patatine_fritte = new Ingredient(getString(R.string.patatine_fritte),getString(R.string.vegetali));
+        Ingredient patatine_fritte = new Ingredient(getString(R.string.patatine_fritte), getString(R.string.vegetali));
         ingredients.add(patatine_fritte);
-        Ingredient patate_lesse = new Ingredient(getString(R.string.patate_lesse),getString(R.string.vegetali));
+        Ingredient patate_lesse = new Ingredient(getString(R.string.patate_lesse), getString(R.string.vegetali));
         ingredients.add(patate_lesse);
-        Ingredient cipolla = new Ingredient(getString(R.string.cipolla),getString(R.string.vegetali));
+        Ingredient cipolla = new Ingredient(getString(R.string.cipolla), getString(R.string.vegetali));
         ingredients.add(cipolla);
-        Ingredient capperi = new Ingredient(getString(R.string.capperi),getString(R.string.vegetali));
+        Ingredient capperi = new Ingredient(getString(R.string.capperi), getString(R.string.vegetali));
         ingredients.add(capperi);
-        Ingredient fiori_di_zucca = new Ingredient(getString(R.string.fiori_di_zucca),getString(R.string.vegetali));
+        Ingredient fiori_di_zucca = new Ingredient(getString(R.string.fiori_di_zucca), getString(R.string.vegetali));
         ingredients.add(fiori_di_zucca);
-        Ingredient pistacchi = new Ingredient(getString(R.string.pistacchi),getString(R.string.vegetali));
+        Ingredient pistacchi = new Ingredient(getString(R.string.pistacchi), getString(R.string.vegetali));
         ingredients.add(pistacchi);
-        Ingredient radicchio = new Ingredient(getString(R.string.radicchio),getString(R.string.vegetali));
+        Ingredient radicchio = new Ingredient(getString(R.string.radicchio), getString(R.string.vegetali));
         ingredients.add(radicchio);
-        Ingredient fagioli = new Ingredient(getString(R.string.fagioli),getString(R.string.vegetali));
+        Ingredient fagioli = new Ingredient(getString(R.string.fagioli), getString(R.string.vegetali));
         ingredients.add(fagioli);
-        Ingredient mais = new Ingredient(getString(R.string.mais),getString(R.string.vegetali));
+        Ingredient mais = new Ingredient(getString(R.string.mais), getString(R.string.vegetali));
         ingredients.add(mais);
-        Ingredient noci = new Ingredient(getString(R.string.noci),getString(R.string.vegetali));
+        Ingredient noci = new Ingredient(getString(R.string.noci), getString(R.string.vegetali));
         ingredients.add(noci);
-        Ingredient cime_di_rapa = new Ingredient(getString(R.string.cime_di_rapa),getString(R.string.vegetali));
+        Ingredient cime_di_rapa = new Ingredient(getString(R.string.cime_di_rapa), getString(R.string.vegetali));
         ingredients.add(cime_di_rapa);
-        Ingredient pomodori_secchi = new Ingredient(getString(R.string.pomodori_secchi),getString(R.string.vegetali));
+        Ingredient pomodori_secchi = new Ingredient(getString(R.string.pomodori_secchi), getString(R.string.vegetali));
         ingredients.add(pomodori_secchi);
 
-        Ingredient speck = new Ingredient(getString(R.string.speck),getString(R.string.salumi));
+        Ingredient speck = new Ingredient(getString(R.string.speck), getString(R.string.salumi));
         ingredients.add(speck);
-        Ingredient prosciutto_cotto = new Ingredient(getString(R.string.prosciutto_cotto),getString(R.string.salumi));
+        Ingredient prosciutto_cotto = new Ingredient(getString(R.string.prosciutto_cotto), getString(R.string.salumi));
         ingredients.add(prosciutto_cotto);
-        Ingredient prosciutto_crudo = new Ingredient(getString(R.string.prosciutto_crudo),getString(R.string.salumi));
+        Ingredient prosciutto_crudo = new Ingredient(getString(R.string.prosciutto_crudo), getString(R.string.salumi));
         ingredients.add(prosciutto_crudo);
-        Ingredient salame_piccante = new Ingredient(getString(R.string.salame_piccante),getString(R.string.salumi));
+        Ingredient salame_piccante = new Ingredient(getString(R.string.salame_piccante), getString(R.string.salumi));
         ingredients.add(salame_piccante);
-        Ingredient salame_dolce = new Ingredient(getString(R.string.salame_dolce),getString(R.string.salumi));
+        Ingredient salame_dolce = new Ingredient(getString(R.string.salame_dolce), getString(R.string.salumi));
         ingredients.add(salame_dolce);
-        Ingredient salsiccia = new Ingredient(getString(R.string.salsiccia),getString(R.string.salumi));
+        Ingredient salsiccia = new Ingredient(getString(R.string.salsiccia), getString(R.string.salumi));
         ingredients.add(salsiccia);
-        Ingredient nduja = new Ingredient(getString(R.string.nduja),getString(R.string.salumi));
+        Ingredient nduja = new Ingredient(getString(R.string.nduja), getString(R.string.salumi));
         ingredients.add(nduja);
-        Ingredient pancetta = new Ingredient(getString(R.string.pancetta),getString(R.string.salumi));
+        Ingredient pancetta = new Ingredient(getString(R.string.pancetta), getString(R.string.salumi));
         ingredients.add(pancetta);
-        Ingredient bresaola = new Ingredient(getString(R.string.bresaola),getString(R.string.salumi));
+        Ingredient bresaola = new Ingredient(getString(R.string.bresaola), getString(R.string.salumi));
         ingredients.add(bresaola);
-        Ingredient uovo = new Ingredient(getString(R.string.uovo),getString(R.string.salumi));
+        Ingredient uovo = new Ingredient(getString(R.string.uovo), getString(R.string.salumi));
         ingredients.add(uovo);
-        Ingredient mortadella = new Ingredient(getString(R.string.mortadella),getString(R.string.salumi));
+        Ingredient mortadella = new Ingredient(getString(R.string.mortadella), getString(R.string.salumi));
         ingredients.add(mortadella);
-        Ingredient wurstel = new Ingredient(getString(R.string.wurstel),getString(R.string.salumi));
+        Ingredient wurstel = new Ingredient(getString(R.string.wurstel), getString(R.string.salumi));
         ingredients.add(wurstel);
-        Ingredient capocollo = new Ingredient(getString(R.string.capocollo),getString(R.string.salumi));
+        Ingredient capocollo = new Ingredient(getString(R.string.capocollo), getString(R.string.salumi));
         ingredients.add(capocollo);
-        Ingredient lardo = new Ingredient(getString(R.string.lardo),getString(R.string.salumi));
+        Ingredient lardo = new Ingredient(getString(R.string.lardo), getString(R.string.salumi));
         ingredients.add(lardo);
 
-        Ingredient mozzarella_di_bufala = new Ingredient(getString(R.string.mozzarella_di_bufala),getString(R.string.formaggi));
+        Ingredient mozzarella_di_bufala = new Ingredient(getString(R.string.mozzarella_di_bufala), getString(R.string.formaggi));
         ingredients.add(mozzarella_di_bufala);
-        Ingredient scamorza = new Ingredient(getString(R.string.scamorza),getString(R.string.formaggi));
+        Ingredient scamorza = new Ingredient(getString(R.string.scamorza), getString(R.string.formaggi));
         ingredients.add(scamorza);
-        Ingredient taleggio = new Ingredient(getString(R.string.taleggio),getString(R.string.formaggi));
+        Ingredient taleggio = new Ingredient(getString(R.string.taleggio), getString(R.string.formaggi));
         ingredients.add(taleggio);
-        Ingredient brie = new Ingredient(getString(R.string.brie),getString(R.string.formaggi));
+        Ingredient brie = new Ingredient(getString(R.string.brie), getString(R.string.formaggi));
         ingredients.add(brie);
-        Ingredient gorgonzola = new Ingredient(getString(R.string.gorgonzola),getString(R.string.formaggi));
+        Ingredient gorgonzola = new Ingredient(getString(R.string.gorgonzola), getString(R.string.formaggi));
         ingredients.add(gorgonzola);
-        Ingredient parmigiano = new Ingredient(getString(R.string.parmigiano),getString(R.string.formaggi));
+        Ingredient parmigiano = new Ingredient(getString(R.string.parmigiano), getString(R.string.formaggi));
         ingredients.add(parmigiano);
-        Ingredient emmenthal = new Ingredient(getString(R.string.emmenthal),getString(R.string.formaggi));
+        Ingredient emmenthal = new Ingredient(getString(R.string.emmenthal), getString(R.string.formaggi));
         ingredients.add(emmenthal);
-        Ingredient burrata = new Ingredient(getString(R.string.burrata),getString(R.string.formaggi));
+        Ingredient burrata = new Ingredient(getString(R.string.burrata), getString(R.string.formaggi));
         ingredients.add(burrata);
-        Ingredient stracciatella = new Ingredient(getString(R.string.stracciatella),getString(R.string.formaggi));
+        Ingredient stracciatella = new Ingredient(getString(R.string.stracciatella), getString(R.string.formaggi));
         ingredients.add(stracciatella);
-        Ingredient provola_affumicata = new Ingredient(getString(R.string.provola_affumicata),getString(R.string.formaggi));
+        Ingredient provola_affumicata = new Ingredient(getString(R.string.provola_affumicata), getString(R.string.formaggi));
         ingredients.add(provola_affumicata);
-        Ingredient fontina = new Ingredient(getString(R.string.fontina),getString(R.string.formaggi));
+        Ingredient fontina = new Ingredient(getString(R.string.fontina), getString(R.string.formaggi));
         ingredients.add(fontina);
 
-        Ingredient salmone = new Ingredient(getString(R.string.salmone),getString(R.string.pesce));
+        Ingredient salmone = new Ingredient(getString(R.string.salmone), getString(R.string.pesce));
         ingredients.add(salmone);
-        Ingredient tonno = new Ingredient(getString(R.string.tonno),getString(R.string.pesce));
+        Ingredient tonno = new Ingredient(getString(R.string.tonno), getString(R.string.pesce));
         ingredients.add(tonno);
-        Ingredient frutti_di_mare = new Ingredient(getString(R.string.frutti_di_mare),getString(R.string.pesce));
+        Ingredient frutti_di_mare = new Ingredient(getString(R.string.frutti_di_mare), getString(R.string.pesce));
         ingredients.add(frutti_di_mare);
-        Ingredient acciughe = new Ingredient(getString(R.string.acciughe),getString(R.string.pesce));
+        Ingredient acciughe = new Ingredient(getString(R.string.acciughe), getString(R.string.pesce));
         ingredients.add(acciughe);
-        Ingredient gamberetti = new Ingredient(getString(R.string.gamberetti),getString(R.string.pesce));
+        Ingredient gamberetti = new Ingredient(getString(R.string.gamberetti), getString(R.string.pesce));
         ingredients.add(gamberetti);
-        Ingredient surimi = new Ingredient(getString(R.string.surimi),getString(R.string.pesce));
+        Ingredient surimi = new Ingredient(getString(R.string.surimi), getString(R.string.pesce));
         ingredients.add(surimi);
-        Ingredient anelli_di_calamari = new Ingredient(getString(R.string.anelli_di_calamari),getString(R.string.pesce));
+        Ingredient anelli_di_calamari = new Ingredient(getString(R.string.anelli_di_calamari), getString(R.string.pesce));
         ingredients.add(anelli_di_calamari);
 
-        Ingredient pesto_alla_genovese = new Ingredient(getString(R.string.pesto_alla_genovese),getString(R.string.salse));
+        Ingredient pesto_alla_genovese = new Ingredient(getString(R.string.pesto_alla_genovese), getString(R.string.salse));
         ingredients.add(pesto_alla_genovese);
-        Ingredient panna = new Ingredient(getString(R.string.panna),getString(R.string.salse));
+        Ingredient panna = new Ingredient(getString(R.string.panna), getString(R.string.salse));
         ingredients.add(panna);
-        Ingredient pesto_di_pistacchi = new Ingredient(getString(R.string.pesto_di_pistacchi),getString(R.string.salse));
+        Ingredient pesto_di_pistacchi = new Ingredient(getString(R.string.pesto_di_pistacchi), getString(R.string.salse));
         ingredients.add(pesto_di_pistacchi);
 
-        Ingredient pere = new Ingredient(getString(R.string.pere),getString(R.string.frutta));
+        Ingredient pere = new Ingredient(getString(R.string.pere), getString(R.string.frutta));
         ingredients.add(pere);
-        Ingredient mele = new Ingredient(getString(R.string.mele),getString(R.string.frutta));
+        Ingredient mele = new Ingredient(getString(R.string.mele), getString(R.string.frutta));
         ingredients.add(mele);
-        Ingredient ananas = new Ingredient(getString(R.string.ananas),getString(R.string.frutta));
+        Ingredient ananas = new Ingredient(getString(R.string.ananas), getString(R.string.frutta));
         ingredients.add(ananas);
 
-        Ingredient origano = new Ingredient(getString(R.string.origano),getString(R.string.spezie));
+        Ingredient origano = new Ingredient(getString(R.string.origano), getString(R.string.spezie));
         ingredients.add(origano);
-        Ingredient rosmarino = new Ingredient(getString(R.string.rosmarino),getString(R.string.spezie));
+        Ingredient rosmarino = new Ingredient(getString(R.string.rosmarino), getString(R.string.spezie));
         ingredients.add(rosmarino);
-        Ingredient aglio = new Ingredient(getString(R.string.aglio),getString(R.string.spezie));
+        Ingredient aglio = new Ingredient(getString(R.string.aglio), getString(R.string.spezie));
         ingredients.add(aglio);
-        Ingredient peperoncino = new Ingredient(getString(R.string.peperoncino),getString(R.string.spezie));
+        Ingredient peperoncino = new Ingredient(getString(R.string.peperoncino), getString(R.string.spezie));
         ingredients.add(peperoncino);
-        Ingredient basilico = new Ingredient(getString(R.string.basilico),getString(R.string.spezie));
+        Ingredient basilico = new Ingredient(getString(R.string.basilico), getString(R.string.spezie));
         ingredients.add(basilico);
 
 
@@ -292,6 +292,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             TextView textView = findViewById(R.id.textView);
             textView.setText(pizza_name);
+
+
+            TextView textView1 = findViewById(R.id.textView7);
+            TextView textView2 = findViewById(R.id.textView9);
+            TextView textView3 = findViewById(R.id.textView10);
+            TextView textView4 = findViewById(R.id.textView11);
+
+            textView1.setText("");
+            textView2.setText("");
+            textView3.setText("");
+            textView4.setText("");
+
+            switch (p_show.getIngredients().size()) {
+                case 4:
+                    textView4.setText(p_show.getIngredients().get(3).getName());
+                case 3:
+                    textView3.setText(p_show.getIngredients().get(2).getName());
+                case 2:
+                    textView2.setText(p_show.getIngredients().get(1).getName());
+                case 1:
+                    textView1.setText(p_show.getIngredients().get(0).getName());
+                    break;
+                case 0:
+                    break;
+            }
+
         }
 
     }
@@ -312,7 +338,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         r3 = new Random();
         r4 = new Random();
 
-        if(filters[0] || filters[1] || filters[2] || filters[3] || filters[4] || filters[5] || filters[6]){
+        if (filters[0] || filters[1] || filters[2] || filters[3] || filters[4] || filters[5] || filters[6]) {
             for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
                 Ingredient ingredient = iterator.next();
                 if (filters[0] && ingredient.getCategory() != null

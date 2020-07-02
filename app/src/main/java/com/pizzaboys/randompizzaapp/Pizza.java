@@ -5,15 +5,10 @@ import java.util.List;
 
 public class Pizza {
     private String name;
-    private List<Ingredient> pizza_ingredients;
+    private List<Ingredient> pizza_ingredients = new ArrayList<>();
 
     public Pizza(String name) {
         this.name = name;
-    }
-
-    public Pizza(String name, List<Ingredient> pizza_ingredients) {
-        this.name = name;
-        this.pizza_ingredients = new ArrayList<>();
     }
 
     public String getName() {
@@ -25,6 +20,6 @@ public class Pizza {
     }
 
     public void addIngredient(Ingredient ingredient) {
-        pizza_ingredients.add(ingredient);
+        this.pizza_ingredients.add(ingredient);
     }
 }
