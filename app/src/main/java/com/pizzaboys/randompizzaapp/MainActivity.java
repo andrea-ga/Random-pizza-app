@@ -376,6 +376,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new P360Fragment()).commit();
                 break;
+            case R.id.nav_good_pizza:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new PGoodFragment()).commit();
+                break;
         }
 
         drawer.closeDrawer(GravityCompat.START);
@@ -559,7 +563,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void generateGood(View view) {
-        /*
+
         Random r1, r2, r3, r4;
         int random_number1 = -1, random_number2 = -1, random_number3 = -1, random_number4 = -1;
         Ingredient ingredient1, ingredient2, ingredient3, ingredient4;
@@ -651,10 +655,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
 
-        TextView textView1 = findViewById(R.id.textView3);
-        TextView textView2 = findViewById(R.id.textView4);
-        TextView textView3 = findViewById(R.id.textView5);
-        TextView textView4 = findViewById(R.id.textView6);
+        TextView textView1 = findViewById(R.id.textView12);
+        TextView textView2 = findViewById(R.id.textView13);
+        TextView textView3 = findViewById(R.id.textView14);
+        TextView textView4 = findViewById(R.id.textView15);
 
         textView1.setText("");
         textView2.setText("");
@@ -679,7 +683,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
 
-    */
     }
 
     public void filtersPopUp(View view) {
