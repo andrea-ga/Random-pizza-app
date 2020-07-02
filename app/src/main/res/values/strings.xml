@@ -35,7 +35,7 @@
     <string name="prosciutto_crudo">Prosciutto crudo</string>
     <string name="salame_piccante">Salame piccante</string>
     <string name="mozzarella_di_bufala">Mozzarella di bufala</string>
-    <string name="scamorza">Scamorza</string>
+    <string name="scamorza_affumicata">Scamorza affumicata</string>
     <string name="taleggio">Taleggio</string>
     <string name="brie">Brie</string>
     <string name="salmone">Salmone</string>
@@ -86,7 +86,6 @@
     <string name="emmenthal">Emmenthal</string>
     <string name="burrata">Burrata</string>
     <string name="stracciatella">Stracciatella</string>
-    <string name="provola_affumicata">Provola affumicata</string>
     <string name="fontina">Fontina</string>
     <string name="gamberetti">Gamberetti</string>
     <string name="surimi">Surimi</string>

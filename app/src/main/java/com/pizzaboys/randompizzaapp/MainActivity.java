@@ -67,12 +67,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch_theme = menuItem.getActionView().findViewById(R.id.drawer_switch);
 
-            //SEE IF THERE IS NIGHT MODE BY DEFAULT
+        //SEE IF THERE IS NIGHT MODE BY DEFAULT
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_UNSPECIFIED) {
             switch_theme.setChecked(true);
         }
 
-            //SET LISTENER
+        //SET LISTENER
         switch_theme.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -180,8 +180,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Ingredient mozzarella_di_bufala = new Ingredient(getString(R.string.mozzarella_di_bufala), getString(R.string.formaggi));
         ingredients.add(mozzarella_di_bufala);
-        Ingredient scamorza = new Ingredient(getString(R.string.scamorza), getString(R.string.formaggi));
-        ingredients.add(scamorza);
+        Ingredient scamorza_affumicata = new Ingredient(getString(R.string.scamorza_affumicata), getString(R.string.formaggi));
+        ingredients.add(scamorza_affumicata);
         Ingredient taleggio = new Ingredient(getString(R.string.taleggio), getString(R.string.formaggi));
         ingredients.add(taleggio);
         Ingredient brie = new Ingredient(getString(R.string.brie), getString(R.string.formaggi));
@@ -196,8 +196,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ingredients.add(burrata);
         Ingredient stracciatella = new Ingredient(getString(R.string.stracciatella), getString(R.string.formaggi));
         ingredients.add(stracciatella);
-        Ingredient provola_affumicata = new Ingredient(getString(R.string.provola_affumicata), getString(R.string.formaggi));
-        ingredients.add(provola_affumicata);
         Ingredient fontina = new Ingredient(getString(R.string.fontina), getString(R.string.formaggi));
         ingredients.add(fontina);
 
@@ -324,7 +322,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void generate360(View view) {
         Random r1, r2, r3, r4;
-        int random_number1, random_number2, random_number3, random_number4;
+        int random_number1 = -1, random_number2 = -1, random_number3 = -1, random_number4 = -1;
         Ingredient ingredient1, ingredient2, ingredient3, ingredient4;
         String ingredient1_name = "", ingredient2_name = "", ingredient3_name = "", ingredient4_name = "";
 
@@ -341,6 +339,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (filters[0] || filters[1] || filters[2] || filters[3] || filters[4] || filters[5] || filters[6]) {
             for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
                 Ingredient ingredient = iterator.next();
+
                 if (filters[0] && ingredient.getCategory() != null
                         && ingredient.getCategory().equals(getString(R.string.vegetali))) {
                     iterator.remove();
@@ -372,35 +371,46 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
 
-        random_number1 = r1.nextInt(filtered_ingredients.size());
-
-        do {
-            random_number2 = r2.nextInt(filtered_ingredients.size());
-        } while (random_number2 == random_number1);
-
-        do {
-            random_number3 = r3.nextInt(filtered_ingredients.size());
-        } while (random_number3 == random_number1 || random_number3 == random_number2);
-
-        do {
-            random_number4 = r4.nextInt(filtered_ingredients.size());
-        } while (random_number4 == random_number3 || random_number4 == random_number2 ||
-                random_number4 == random_number1);
-
-        ingredient1 = filtered_ingredients.get(random_number1);
-        ingredient2 = filtered_ingredients.get(random_number2);
-        ingredient3 = filtered_ingredients.get(random_number3);
-        ingredient4 = filtered_ingredients.get(random_number4);
-
-        if (ingredient1 != null)
+        if (filtered_ingredients.size() == 0) {
+            Toast.makeText(getApplicationContext(), "You're gonna eat nothing!\nPlease remove some filters.", Toast.LENGTH_SHORT).show();
+        } else {
+            random_number1 = r1.nextInt(filtered_ingredients.size());
+            ingredient1 = filtered_ingredients.get(random_number1);
             ingredient1_name = ingredient1.getName();
-        if (ingredient2 != null)
-            ingredient2_name = ingredient2.getName();
-        if (ingredient3 != null)
-            ingredient3_name = ingredient3.getName();
-        if (ingredient4 != null)
-            ingredient4_name = ingredient4.getName();
 
+            if (filtered_ingredients.size() >= 2) {
+
+                do {
+                    random_number2 = r2.nextInt(filtered_ingredients.size());
+                } while (random_number2 == random_number1);
+
+                ingredient2 = filtered_ingredients.get(random_number2);
+                ingredient2_name = ingredient2.getName();
+
+                if (filtered_ingredients.size() >= 3) {
+
+                    do {
+                        random_number3 = r3.nextInt(filtered_ingredients.size());
+                    } while (random_number3 == random_number1 || random_number3 == random_number2);
+
+                    ingredient3 = filtered_ingredients.get(random_number3);
+                    ingredient3_name = ingredient3.getName();
+
+                    if (filtered_ingredients.size() >= 4) {
+
+                        do {
+                            random_number4 = r4.nextInt(filtered_ingredients.size());
+                        } while (random_number4 == random_number3 || random_number4 == random_number2 ||
+                                random_number4 == random_number1);
+
+                        ingredient4 = filtered_ingredients.get(random_number4);
+                        ingredient4_name = ingredient4.getName();
+                    }
+
+                }
+            }
+
+        }
 
         TextView textView1 = findViewById(R.id.textView3);
         TextView textView2 = findViewById(R.id.textView4);
@@ -416,15 +426,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (radioGroup.getCheckedRadioButtonId()) {
             case R.id.radio_4:
-                textView4.setText(ingredient4_name);
+                if (random_number4 != -1)
+                    textView4.setText(ingredient4_name);
             case R.id.radio_3:
-                textView3.setText(ingredient3_name);
+                if (random_number3 != -1)
+                    textView3.setText(ingredient3_name);
             case R.id.radio_2:
-                textView2.setText(ingredient2_name);
+                if (random_number2 != -1)
+                    textView2.setText(ingredient2_name);
             case R.id.radio_1:
-                textView1.setText(ingredient1_name);
+                if (random_number1 != -1)
+                    textView1.setText(ingredient1_name);
                 break;
         }
+
 
     }
 
