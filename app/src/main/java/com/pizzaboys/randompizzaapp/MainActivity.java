@@ -222,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String ingredient1_name = "", ingredient2_name = "", ingredient3_name = "", ingredient4_name = "";
 
         if (ingredients.size() != filtered_ingredients.size()) {
-            filtered_ingredients.removeAll(filtered_ingredients);
+            filtered_ingredients.clear();
             filtered_ingredients.addAll(ingredients);
         }
 
@@ -231,63 +231,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         r3 = new Random();
         r4 = new Random();
 
-        if (filters[0]) {
+        if(filters[0] || filters[1] || filters[2] || filters[3] || filters[4] || filters[5] || filters[6]){
             for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
                 Ingredient ingredient = iterator.next();
-                if (ingredient.getCategory() != null && ingredient.getCategory().equals(getString(R.string.vegetali))) {
+                if (filters[0] && ingredient.getCategory() != null
+                        && ingredient.getCategory().equals(getString(R.string.vegetali))) {
+                    iterator.remove();
+                }
+                if (filters[1] && ingredient.getCategory() != null
+                        && ingredient.getCategory().equals(getString(R.string.pesce))) {
+                    iterator.remove();
+                }
+                if (filters[2] && ingredient.getCategory() != null
+                        && ingredient.getCategory().equals(getString(R.string.formaggi))) {
+                    iterator.remove();
+                }
+                if (filters[3] && ingredient.getCategory() != null
+                        && ingredient.getCategory().equals(getString(R.string.salumi))) {
+                    iterator.remove();
+                }
+                if (filters[4] && ingredient.getCategory() != null
+                        && ingredient.getCategory().equals(getString(R.string.salse))) {
+                    iterator.remove();
+                }
+                if (filters[5] && ingredient.getCategory() != null
+                        && ingredient.getCategory().equals(getString(R.string.frutta))) {
+                    iterator.remove();
+                }
+                if (filters[6] && ingredient.getCategory() != null
+                        && ingredient.getCategory().equals(getString(R.string.spezie))) {
                     iterator.remove();
                 }
             }
         }
-        if (filters[1]) {
-            for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
-                Ingredient ingredient = iterator.next();
-                if (ingredient.getCategory() != null && ingredient.getCategory().equals(getString(R.string.pesce))) {
-                    iterator.remove();
-                }
-            }
-        }
-        if (filters[2]) {
-            for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
-                Ingredient ingredient = iterator.next();
-                if (ingredient.getCategory() != null && ingredient.getCategory().equals(getString(R.string.formaggi))) {
-                    iterator.remove();
-                }
-            }
-        }
-        if (filters[3]) {
-            for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
-                Ingredient ingredient = iterator.next();
-                if (ingredient.getCategory() != null && ingredient.getCategory().equals(getString(R.string.salumi))) {
-                    iterator.remove();
-                }
-            }
-        }
-        if (filters[4]) {
-            for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
-                Ingredient ingredient = iterator.next();
-                if (ingredient.getCategory() != null && ingredient.getCategory().equals(getString(R.string.salse))) {
-                    iterator.remove();
-                }
-            }
-        }
-        if (filters[5]) {
-            for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
-                Ingredient ingredient = iterator.next();
-                if (ingredient.getCategory() != null && ingredient.getCategory().equals(getString(R.string.frutta))) {
-                    iterator.remove();
-                }
-            }
-        }
-        if (filters[6]) {
-            for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
-                Ingredient ingredient = iterator.next();
-                if (ingredient.getCategory() != null && ingredient.getCategory().equals(getString(R.string.spezie))) {
-                    iterator.remove();
-                }
-            }
-        }
-
 
         random_number1 = r1.nextInt(filtered_ingredients.size());
 
