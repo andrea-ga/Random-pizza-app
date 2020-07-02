@@ -96,12 +96,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.setCheckedItem(R.id.nav_traditional);
         }
 
-        createIngredientsList();
-        createPizzaList();
+        createAllList();
 
     }
 
-    public void createIngredientsList() {
+    public void createAllList() {
+        //INGREDIENTS
         Ingredient olive = new Ingredient(getString(R.string.olive),getString(R.string.vegetali));
         ingredients.add(olive);
         Ingredient zucchine = new Ingredient(getString(R.string.zucchine),getString(R.string.vegetali));
@@ -110,6 +110,45 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ingredients.add(melanzane);
         Ingredient peperoni = new Ingredient(getString(R.string.peperoni),getString(R.string.vegetali));
         ingredients.add(peperoni);
+        Ingredient asparagi = new Ingredient(getString(R.string.asparagi),getString(R.string.vegetali));
+        ingredients.add(asparagi);
+        Ingredient friarelli = new Ingredient(getString(R.string.friarelli),getString(R.string.vegetali));
+        ingredients.add(friarelli);
+        Ingredient rucola = new Ingredient(getString(R.string.rucola),getString(R.string.vegetali));
+        ingredients.add(rucola);
+        Ingredient carciofi = new Ingredient(getString(R.string.carciofi),getString(R.string.vegetali));
+        ingredients.add(carciofi);
+        Ingredient funghi_porcini = new Ingredient(getString(R.string.funghi_porcini),getString(R.string.vegetali));
+        ingredients.add(funghi_porcini);
+        Ingredient funghi_champignon = new Ingredient(getString(R.string.funghi_champignon),getString(R.string.vegetali));
+        ingredients.add(funghi_champignon);
+        Ingredient zucca = new Ingredient(getString(R.string.zucca),getString(R.string.vegetali));
+        ingredients.add(zucca);
+        Ingredient patatine_fritte = new Ingredient(getString(R.string.patatine_fritte),getString(R.string.vegetali));
+        ingredients.add(patatine_fritte);
+        Ingredient patate_lesse = new Ingredient(getString(R.string.patate_lesse),getString(R.string.vegetali));
+        ingredients.add(patate_lesse);
+        Ingredient cipolla = new Ingredient(getString(R.string.cipolla),getString(R.string.vegetali));
+        ingredients.add(cipolla);
+        Ingredient capperi = new Ingredient(getString(R.string.capperi),getString(R.string.vegetali));
+        ingredients.add(capperi);
+        Ingredient fiori_di_zucca = new Ingredient(getString(R.string.fiori_di_zucca),getString(R.string.vegetali));
+        ingredients.add(fiori_di_zucca);
+        Ingredient pistacchi = new Ingredient(getString(R.string.pistacchi),getString(R.string.vegetali));
+        ingredients.add(pistacchi);
+        Ingredient radicchio = new Ingredient(getString(R.string.radicchio),getString(R.string.vegetali));
+        ingredients.add(radicchio);
+        Ingredient fagioli = new Ingredient(getString(R.string.fagioli),getString(R.string.vegetali));
+        ingredients.add(fagioli);
+        Ingredient mais = new Ingredient(getString(R.string.mais),getString(R.string.vegetali));
+        ingredients.add(mais);
+        Ingredient noci = new Ingredient(getString(R.string.noci),getString(R.string.vegetali));
+        ingredients.add(noci);
+        Ingredient cime_di_rapa = new Ingredient(getString(R.string.cime_di_rapa),getString(R.string.vegetali));
+        ingredients.add(cime_di_rapa);
+        Ingredient pomodori_secchi = new Ingredient(getString(R.string.pomodori_secchi),getString(R.string.vegetali));
+        ingredients.add(pomodori_secchi);
+
         Ingredient speck = new Ingredient(getString(R.string.speck),getString(R.string.salumi));
         ingredients.add(speck);
         Ingredient prosciutto_cotto = new Ingredient(getString(R.string.prosciutto_cotto),getString(R.string.salumi));
@@ -118,6 +157,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ingredients.add(prosciutto_crudo);
         Ingredient salame_piccante = new Ingredient(getString(R.string.salame_piccante),getString(R.string.salumi));
         ingredients.add(salame_piccante);
+        Ingredient salame_dolce = new Ingredient(getString(R.string.salame_dolce),getString(R.string.salumi));
+        ingredients.add(salame_dolce);
+        Ingredient salsiccia = new Ingredient(getString(R.string.salsiccia),getString(R.string.salumi));
+        ingredients.add(salsiccia);
+        Ingredient nduja = new Ingredient(getString(R.string.nduja),getString(R.string.salumi));
+        ingredients.add(nduja);
+        Ingredient pancetta = new Ingredient(getString(R.string.pancetta),getString(R.string.salumi));
+        ingredients.add(pancetta);
+        Ingredient bresaola = new Ingredient(getString(R.string.bresaola),getString(R.string.salumi));
+        ingredients.add(bresaola);
+        Ingredient uovo = new Ingredient(getString(R.string.uovo),getString(R.string.salumi));
+        ingredients.add(uovo);
+        Ingredient mortadella = new Ingredient(getString(R.string.mortadella),getString(R.string.salumi));
+        ingredients.add(mortadella);
+        Ingredient wurstel = new Ingredient(getString(R.string.wurstel),getString(R.string.salumi));
+        ingredients.add(wurstel);
+        Ingredient capocollo = new Ingredient(getString(R.string.capocollo),getString(R.string.salumi));
+        ingredients.add(capocollo);
+        Ingredient lardo = new Ingredient(getString(R.string.lardo),getString(R.string.salumi));
+        ingredients.add(lardo);
+
         Ingredient mozzarella_di_bufala = new Ingredient(getString(R.string.mozzarella_di_bufala),getString(R.string.formaggi));
         ingredients.add(mozzarella_di_bufala);
         Ingredient scamorza = new Ingredient(getString(R.string.scamorza),getString(R.string.formaggi));
@@ -126,6 +186,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ingredients.add(taleggio);
         Ingredient brie = new Ingredient(getString(R.string.brie),getString(R.string.formaggi));
         ingredients.add(brie);
+        Ingredient gorgonzola = new Ingredient(getString(R.string.gorgonzola),getString(R.string.formaggi));
+        ingredients.add(gorgonzola);
+        Ingredient parmigiano = new Ingredient(getString(R.string.parmigiano),getString(R.string.formaggi));
+        ingredients.add(parmigiano);
+        Ingredient emmenthal = new Ingredient(getString(R.string.emmenthal),getString(R.string.formaggi));
+        ingredients.add(emmenthal);
+        Ingredient burrata = new Ingredient(getString(R.string.burrata),getString(R.string.formaggi));
+        ingredients.add(burrata);
+        Ingredient stracciatella = new Ingredient(getString(R.string.stracciatella),getString(R.string.formaggi));
+        ingredients.add(stracciatella);
+        Ingredient provola_affumicata = new Ingredient(getString(R.string.provola_affumicata),getString(R.string.formaggi));
+        ingredients.add(provola_affumicata);
+        Ingredient fontina = new Ingredient(getString(R.string.fontina),getString(R.string.formaggi));
+        ingredients.add(fontina);
+
         Ingredient salmone = new Ingredient(getString(R.string.salmone),getString(R.string.pesce));
         ingredients.add(salmone);
         Ingredient tonno = new Ingredient(getString(R.string.tonno),getString(R.string.pesce));
@@ -134,18 +209,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ingredients.add(frutti_di_mare);
         Ingredient acciughe = new Ingredient(getString(R.string.acciughe),getString(R.string.pesce));
         ingredients.add(acciughe);
+        Ingredient gamberetti = new Ingredient(getString(R.string.gamberetti),getString(R.string.pesce));
+        ingredients.add(gamberetti);
+        Ingredient surimi = new Ingredient(getString(R.string.surimi),getString(R.string.pesce));
+        ingredients.add(surimi);
+        Ingredient anelli_di_calamari = new Ingredient(getString(R.string.anelli_di_calamari),getString(R.string.pesce));
+        ingredients.add(anelli_di_calamari);
+
         Ingredient pesto_alla_genovese = new Ingredient(getString(R.string.pesto_alla_genovese),getString(R.string.salse));
         ingredients.add(pesto_alla_genovese);
         Ingredient panna = new Ingredient(getString(R.string.panna),getString(R.string.salse));
         ingredients.add(panna);
         Ingredient pesto_di_pistacchi = new Ingredient(getString(R.string.pesto_di_pistacchi),getString(R.string.salse));
         ingredients.add(pesto_di_pistacchi);
+
         Ingredient pere = new Ingredient(getString(R.string.pere),getString(R.string.frutta));
         ingredients.add(pere);
         Ingredient mele = new Ingredient(getString(R.string.mele),getString(R.string.frutta));
         ingredients.add(mele);
         Ingredient ananas = new Ingredient(getString(R.string.ananas),getString(R.string.frutta));
         ingredients.add(ananas);
+
         Ingredient origano = new Ingredient(getString(R.string.origano),getString(R.string.spezie));
         ingredients.add(origano);
         Ingredient rosmarino = new Ingredient(getString(R.string.rosmarino),getString(R.string.spezie));
@@ -154,20 +238,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ingredients.add(aglio);
         Ingredient peperoncino = new Ingredient(getString(R.string.peperoncino),getString(R.string.spezie));
         ingredients.add(peperoncino);
+        Ingredient basilico = new Ingredient(getString(R.string.basilico),getString(R.string.spezie));
+        ingredients.add(basilico);
 
 
         filtered_ingredients.addAll(ingredients);
-    }
 
-    public void createPizzaList() {
-        Pizza margherita = new Pizza("Margherita");
-        pizzas.add(margherita);
-        Pizza marinara = new Pizza("Marinara");
-        pizzas.add(marinara);
-        Pizza quattroFormaggi = new Pizza("4 Formaggi");
-        pizzas.add(quattroFormaggi);
-        Pizza vegetariana = new Pizza("Vegetariana");
-        pizzas.add(vegetariana);
+        //PIZZE
+        Pizza americana = new Pizza(getString(R.string.americana));
+        americana.addIngredient(wurstel);
+        americana.addIngredient(patatine_fritte);
+        pizzas.add(americana);
     }
 
     @Override

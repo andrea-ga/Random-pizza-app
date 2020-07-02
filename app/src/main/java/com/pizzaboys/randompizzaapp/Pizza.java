@@ -1,26 +1,30 @@
 package com.pizzaboys.randompizzaapp;
 
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Pizza {
     private String name;
-    private Collection<Ingredient> pizza_ingredients = new HashSet<>();
+    private List<Ingredient> pizza_ingredients;
 
     public Pizza(String name) {
         this.name = name;
     }
 
-    public Pizza(String name, Collection<Ingredient> pizza_ingredients) {
+    public Pizza(String name, List<Ingredient> pizza_ingredients) {
         this.name = name;
-        this.pizza_ingredients = pizza_ingredients;
+        this.pizza_ingredients = new ArrayList<>();
     }
 
     public String getName() {
         return name;
     }
 
-    public Collection<Ingredient> getIngredients() {
+    public List<Ingredient> getIngredients() {
         return pizza_ingredients;
+    }
+
+    public void addIngredient(Ingredient ingredient) {
+        pizza_ingredients.add(ingredient);
     }
 }
