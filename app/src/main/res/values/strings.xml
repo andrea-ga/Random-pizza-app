@@ -91,6 +91,7 @@
     <string name="surimi">Surimi</string>
     <string name="anelli_di_calamari">Anelli di calamari</string>
     <string name="basilico">Basilico</string>
+    <string name="pomodorini">Pomodorini</string>
     <string name="vegetali">Vegetali</string>
     <string name="salumi">Salumi</string>
     <string name="formaggi">Formaggi</string>
@@ -102,5 +103,29 @@
     <string name="boscaiola">Boscaiola</string>
     <string name="quattro_formaggi">4 Formaggi</string>
     <string name="quattro_stagioni">4 Stagioni</string>
+    <string name="tonno_cipolla">Tonno e cipolla</string>
+    <string name="vegetariana">Vegetariana/Ortolana</string>
+    <string name="parmigiana">Parmigiana</string>
+    <string name="parma">Parma</string>
+    <string name="diavola">Diavola</string>
+    <string name="pugliese">Pugliese</string>
+    <string name="romana">Romana</string>
+    <string name="napoli">Napoli</string>
+    <string name="prosciutto_funghi">Prosciutto e funghi</string>
+    <string name="monzese">Monzese</string>
+    <string name="bufalina">Bufalina</string>
+    <string name="trevigiana">Trevigiana</string>
+    <string name="tirolese">Tirolese</string>
+    <string name="calzone_margherita">Calzone margherita</string>
+    <string name="calzone_farcito">Calzone farcito</string>
+    <string name="pizza_frutti_di_mare">Frutti di mare</string>
+    <string name="bismarck">Bismarck</string>
+    <string name="norvegese">Norvegese</string>
+    <string name="genovese">Genovese</string>
+    <string name="primavera">Primavera</string>
+    <string name="speck_zola">Speck e zola</string>
+    <string name="margherita">Margherita</string>
+    <string name="marinara">Marinara</string>
+    <string name="salsiccia_patate">Salsiccia e patate</string>
 
 </resources>

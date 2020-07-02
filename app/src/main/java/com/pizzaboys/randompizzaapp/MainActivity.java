@@ -148,6 +148,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ingredients.add(cime_di_rapa);
         Ingredient pomodori_secchi = new Ingredient(getString(R.string.pomodori_secchi), getString(R.string.vegetali));
         ingredients.add(pomodori_secchi);
+        Ingredient pomodorini = new Ingredient(getString(R.string.pomodorini), getString(R.string.vegetali));
+        ingredients.add(pomodorini);
 
         Ingredient speck = new Ingredient(getString(R.string.speck), getString(R.string.salumi));
         ingredients.add(speck);
@@ -247,6 +249,119 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         americana.addIngredient(wurstel);
         americana.addIngredient(patatine_fritte);
         pizzas.add(americana);
+
+        Pizza margherita = new Pizza(getString(R.string.margherita));
+        pizzas.add(margherita);
+
+        Pizza marinara = new Pizza(getString(R.string.marinara));
+        pizzas.add(marinara);
+
+        Pizza boscaiola = new Pizza(getString(R.string.boscaiola));
+        boscaiola.addIngredient(salsiccia);
+        boscaiola.addIngredient(funghi_champignon);
+        boscaiola.addIngredient(olive);
+        pizzas.add(boscaiola);
+
+        Pizza quattro_formaggi = new Pizza(getString(R.string.quattro_formaggi));
+        pizzas.add(quattro_formaggi);
+
+        Pizza quattro_stagioni = new Pizza(getString(R.string.quattro_stagioni));
+        quattro_stagioni.addIngredient(prosciutto_cotto);
+        quattro_stagioni.addIngredient(olive);
+        quattro_stagioni.addIngredient(funghi_champignon);
+        quattro_stagioni.addIngredient(carciofi);
+        pizzas.add(quattro_stagioni);
+
+        Pizza tonno_cipolla = new Pizza(getString(R.string.tonno_cipolla));
+        pizzas.add(tonno_cipolla);
+
+        Pizza vegetariana = new Pizza(getString(R.string.vegetariana));
+        pizzas.add(vegetariana);
+
+        Pizza parmigiana = new Pizza(getString(R.string.parmigiana));
+        parmigiana.addIngredient(melanzane);
+        parmigiana.addIngredient(parmigiano);
+        pizzas.add(parmigiana);
+
+        Pizza diavola = new Pizza(getString(R.string.diavola));
+        diavola.addIngredient(salame_piccante);
+        pizzas.add(diavola);
+
+        Pizza parma = new Pizza(getString(R.string.parma));
+        parma.addIngredient(prosciutto_crudo);
+        parma.addIngredient(rucola);
+        pizzas.add(parma);
+
+        Pizza pugliese = new Pizza(getString(R.string.pugliese));
+        pugliese.addIngredient(cipolla);
+        pizzas.add(pugliese);
+
+        Pizza romana = new Pizza(getString(R.string.romana));
+        romana.addIngredient(acciughe);
+        romana.addIngredient(origano);
+        pizzas.add(romana);
+
+        Pizza napoli = new Pizza(getString(R.string.napoli));
+        napoli.addIngredient(acciughe);
+        napoli.addIngredient(capperi);
+        napoli.addIngredient(origano);
+        pizzas.add(napoli);
+
+        Pizza prosciutto_funghi = new Pizza(getString(R.string.prosciutto_funghi));
+        pizzas.add(prosciutto_funghi);
+
+        Pizza monzese = new Pizza(getString(R.string.monzese));
+        monzese.addIngredient(salsiccia);
+        pizzas.add(monzese);
+
+        Pizza bufalina = new Pizza(getString(R.string.bufalina));
+        bufalina.addIngredient(mozzarella_di_bufala);
+        pizzas.add(bufalina);
+
+        Pizza trevigiana = new Pizza(getString(R.string.trevigiana));
+        trevigiana.addIngredient(radicchio);
+        trevigiana.addIngredient(speck);
+        pizzas.add(trevigiana);
+
+        Pizza tirolese = new Pizza(getString(R.string.tirolese));
+        tirolese.addIngredient(speck);
+        pizzas.add(tirolese);
+
+        Pizza calzone_margherita = new Pizza(getString(R.string.calzone_margherita));
+        pizzas.add(calzone_margherita);
+
+        Pizza calzone_farcito = new Pizza(getString(R.string.calzone_farcito));
+        pizzas.add(calzone_farcito);
+
+        Pizza pizza_frutti_di_mare = new Pizza(getString(R.string.pizza_frutti_di_mare));
+        pizzas.add(pizza_frutti_di_mare);
+
+        Pizza bismarck = new Pizza(getString(R.string.bismarck));
+        bismarck.addIngredient(uovo);
+        bismarck.addIngredient(prosciutto_cotto);
+        pizzas.add(bismarck);
+
+        Pizza norvegese = new Pizza(getString(R.string.norvegese));
+        norvegese.addIngredient(salmone);
+        pizzas.add(norvegese);
+
+        Pizza genovese = new Pizza(getString(R.string.genovese));
+        genovese.addIngredient(pesto_alla_genovese);
+        genovese.addIngredient(pomodorini);
+        pizzas.add(genovese);
+
+        Pizza primavera = new Pizza(getString(R.string.primavera));
+        primavera.addIngredient(rucola);
+        primavera.addIngredient(parmigiano);
+        pizzas.add(primavera);
+
+        Pizza speck_zola = new Pizza(getString(R.string.speck_zola));
+        pizzas.add(speck_zola);
+
+        Pizza salsiccia_patate = new Pizza(getString(R.string.salsiccia_patate));
+        salsiccia_patate.addIngredient(patate_lesse);
+        salsiccia_patate.addIngredient(salsiccia);
+        pizzas.add(salsiccia_patate);
     }
 
     @Override
