@@ -558,6 +558,130 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    public void generateGood(View view) {
+        /*
+        Random r1, r2, r3, r4;
+        int random_number1 = -1, random_number2 = -1, random_number3 = -1, random_number4 = -1;
+        Ingredient ingredient1, ingredient2, ingredient3, ingredient4;
+        String ingredient1_name = "", ingredient2_name = "", ingredient3_name = "", ingredient4_name = "";
+
+        if (ingredients.size() != filtered_ingredients.size()) {
+            filtered_ingredients.clear();
+            filtered_ingredients.addAll(ingredients);
+        }
+
+        r1 = new Random();
+        r2 = new Random();
+        r3 = new Random();
+        r4 = new Random();
+
+        if (filters[0] || filters[1] || filters[2] || filters[3] || filters[4] || filters[5] || filters[6]) {
+            for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
+                Ingredient ingredient = iterator.next();
+
+                if (filters[0] && ingredient.getCategory() != null
+                        && ingredient.getCategory().equals(getString(R.string.vegetali))) {
+                    iterator.remove();
+                }
+                if (filters[1] && ingredient.getCategory() != null
+                        && ingredient.getCategory().equals(getString(R.string.pesce))) {
+                    iterator.remove();
+                }
+                if (filters[2] && ingredient.getCategory() != null
+                        && ingredient.getCategory().equals(getString(R.string.formaggi))) {
+                    iterator.remove();
+                }
+                if (filters[3] && ingredient.getCategory() != null
+                        && ingredient.getCategory().equals(getString(R.string.salumi))) {
+                    iterator.remove();
+                }
+                if (filters[4] && ingredient.getCategory() != null
+                        && ingredient.getCategory().equals(getString(R.string.salse))) {
+                    iterator.remove();
+                }
+                if (filters[5] && ingredient.getCategory() != null
+                        && ingredient.getCategory().equals(getString(R.string.frutta))) {
+                    iterator.remove();
+                }
+                if (filters[6] && ingredient.getCategory() != null
+                        && ingredient.getCategory().equals(getString(R.string.spezie))) {
+                    iterator.remove();
+                }
+            }
+        }
+
+        if (filtered_ingredients.size() == 0) {
+            Toast.makeText(getApplicationContext(), "You're gonna eat nothing!\nPlease remove some filters.", Toast.LENGTH_SHORT).show();
+        } else {
+            random_number1 = r1.nextInt(filtered_ingredients.size());
+            ingredient1 = filtered_ingredients.get(random_number1);
+            ingredient1_name = ingredient1.getName();
+
+            if (filtered_ingredients.size() >= 2) {
+
+                do {
+                    random_number2 = r2.nextInt(filtered_ingredients.size());
+                } while (random_number2 == random_number1);
+
+                ingredient2 = filtered_ingredients.get(random_number2);
+                ingredient2_name = ingredient2.getName();
+
+                if (filtered_ingredients.size() >= 3) {
+
+                    do {
+                        random_number3 = r3.nextInt(filtered_ingredients.size());
+                    } while (random_number3 == random_number1 || random_number3 == random_number2);
+
+                    ingredient3 = filtered_ingredients.get(random_number3);
+                    ingredient3_name = ingredient3.getName();
+
+                    if (filtered_ingredients.size() >= 4) {
+
+                        do {
+                            random_number4 = r4.nextInt(filtered_ingredients.size());
+                        } while (random_number4 == random_number3 || random_number4 == random_number2 ||
+                                random_number4 == random_number1);
+
+                        ingredient4 = filtered_ingredients.get(random_number4);
+                        ingredient4_name = ingredient4.getName();
+                    }
+
+                }
+            }
+
+        }
+
+        TextView textView1 = findViewById(R.id.textView3);
+        TextView textView2 = findViewById(R.id.textView4);
+        TextView textView3 = findViewById(R.id.textView5);
+        TextView textView4 = findViewById(R.id.textView6);
+
+        textView1.setText("");
+        textView2.setText("");
+        textView3.setText("");
+        textView4.setText("");
+
+        RadioGroup radioGroup = findViewById(R.id.radio_group);
+
+        switch (radioGroup.getCheckedRadioButtonId()) {
+            case R.id.radio_4:
+                if (random_number4 != -1)
+                    textView4.setText(ingredient4_name);
+            case R.id.radio_3:
+                if (random_number3 != -1)
+                    textView3.setText(ingredient3_name);
+            case R.id.radio_2:
+                if (random_number2 != -1)
+                    textView2.setText(ingredient2_name);
+            case R.id.radio_1:
+                if (random_number1 != -1)
+                    textView1.setText(ingredient1_name);
+                break;
+        }
+
+    */
+    }
+
     public void filtersPopUp(View view) {
 
         View popupView = getLayoutInflater().inflate(R.layout.popup_layout, null);
