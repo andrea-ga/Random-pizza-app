@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioGroup;
 import android.widget.Switch;
@@ -687,7 +688,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void filtersPopUp(View view) {
 
-        View popupView = getLayoutInflater().inflate(R.layout.popup_layout, null);
+        View popupView = getLayoutInflater().inflate(R.layout.popup_layout,
+                new LinearLayout(getApplicationContext()), false);
 
         PopupWindow popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT);
