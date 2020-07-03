@@ -15,6 +15,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -105,7 +106,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 }
 
-                SharedPreferences.Editor editor = getSharedPreferences("com.pizzaboys.randompizzaapp.THEME", MODE_PRIVATE).edit();
+                SharedPreferences.Editor editor =
+                        getSharedPreferences("com.pizzaboys.randompizzaapp.THEME", MODE_PRIVATE).edit();
                 editor.putBoolean("THEME", b);
                 editor.apply();
 
@@ -446,30 +448,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             TextView textView = findViewById(R.id.textView);
             textView.setText(pizza_name);
 
+            Button button_ing = findViewById(R.id.button6);
 
-            TextView textView1 = findViewById(R.id.textView7);
-            TextView textView2 = findViewById(R.id.textView9);
-            TextView textView3 = findViewById(R.id.textView10);
-            TextView textView4 = findViewById(R.id.textView11);
-
-            textView1.setText("");
-            textView2.setText("");
-            textView3.setText("");
-            textView4.setText("");
-
-            switch (p_show.getIngredients().size()) {
-                case 4:
-                    textView4.setText(p_show.getIngredients().get(3).getName());
-                case 3:
-                    textView3.setText(p_show.getIngredients().get(2).getName());
-                case 2:
-                    textView2.setText(p_show.getIngredients().get(1).getName());
-                case 1:
-                    textView1.setText(p_show.getIngredients().get(0).getName());
-                    break;
-                case 0:
-                    break;
+            if(p_show.getIngredients().size()==0){
+                button_ing.setEnabled(false);
             }
+            else{
+                button_ing.setEnabled(true);
+            }
+
 
         }
 
@@ -937,4 +924,63 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    public void filtersPopUp2(View view){
+        View popupView = getLayoutInflater().inflate(R.layout.popup_layout_2,
+                new LinearLayout(getApplicationContext()), false);
+
+        PopupWindow popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.WRAP_CONTENT);
+
+        String p_show_name;
+        Pizza p_show = null;
+
+        TextView textView_pizza = findViewById(R.id.textView);
+        p_show_name = textView_pizza.getText().toString();
+
+        for(Pizza p : pizzas){
+            if(p.getName().equals(p_show_name)){
+                p_show = p;
+                break;
+            }
+        }
+
+
+        TextView textView1 = popupView.findViewById(R.id.textView7);
+        TextView textView2 = popupView.findViewById(R.id.textView9);
+        TextView textView3 = popupView.findViewById(R.id.textView10);
+        TextView textView4 = popupView.findViewById(R.id.textView11);
+
+        textView1.setText("");
+        textView2.setText("");
+        textView3.setText("");
+        textView4.setText("");
+
+
+        if(p_show!=null) {
+            switch (p_show.getIngredients().size()) {
+                case 4:
+                    textView4.setText(p_show.getIngredients().get(3).getName());
+                case 3:
+                    textView3.setText(p_show.getIngredients().get(2).getName());
+                case 2:
+                    textView2.setText(p_show.getIngredients().get(1).getName());
+                case 1:
+                    textView1.setText(p_show.getIngredients().get(0).getName());
+                    break;
+                case 0:
+                    break;
+            }
+        }
+
+        popupWindow.setFocusable(true);
+
+        popupWindow.setBackgroundDrawable(new ColorDrawable());
+
+        int[] location = new int[2];
+
+        view.getLocationOnScreen(location);
+
+        popupWindow.showAtLocation(view, Gravity.NO_GRAVITY, location[0], location[1] +
+                view.getHeight());
+    }
 }

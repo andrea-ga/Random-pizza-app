@@ -128,5 +128,6 @@
     <string name="marinara">Marinara</string>
     <string name="salsiccia_patate">Salsiccia e patate</string>
     <string name="menu_good_pizza">Good Pizza</string>
+    <string name="button_show_ingredients">SHOW INGREDIENTS</string>
 
 </resources>
