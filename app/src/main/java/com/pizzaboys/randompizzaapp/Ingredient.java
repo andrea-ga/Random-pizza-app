@@ -10,10 +10,6 @@ public class Ingredient {
     private List<Ingredient> good_matches = new ArrayList<>();
     private List<Ingredient> bad_matches = new ArrayList<>();
 
-    public Ingredient(String name) {
-        this.name = name;
-    }
-
     public Ingredient(String name, String category) {
         this.name = name;
         this.category = category;
@@ -39,15 +35,7 @@ public class Ingredient {
         return  good_matches;
     }
 
-    public void setGood_matches(List<Ingredient> good_matches){
-        this.good_matches = good_matches;
-    }
-
     public List<Ingredient> getBad_matches(){
         return  bad_matches;
-    }
-
-    public void setBad_matches(List<Ingredient> bad_matches){
-        this.bad_matches = bad_matches;
     }
 }
