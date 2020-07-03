@@ -397,8 +397,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         pizzas.add(speck_zola);
 
         Pizza salsiccia_patate = new Pizza(getString(R.string.salsiccia_patate));
-        salsiccia_patate.addIngredient(patate_lesse);
-        salsiccia_patate.addIngredient(salsiccia);
         pizzas.add(salsiccia_patate);
     }
 
