@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -58,6 +59,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        boolean theme_dark_default = false;
+        if (AppCompatDelegate.getDefaultNightMode()
+                == AppCompatDelegate.MODE_NIGHT_UNSPECIFIED)    //SEE IF THERE IS NIGHT MODE BY DEFAULT
+            theme_dark_default = true;
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -77,20 +83,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch_theme = menuItem.getActionView().findViewById(R.id.drawer_switch);
 
-            //SEE IF THERE IS NIGHT MODE BY DEFAULT
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_UNSPECIFIED) {
+        SharedPreferences mPrefs = getSharedPreferences("com.pizzaboys.randompizzaapp.THEME", MODE_PRIVATE);
+        boolean theme_boolean = mPrefs.getBoolean("THEME", theme_dark_default);
+
+        if (theme_boolean) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             switch_theme.setChecked(true);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            switch_theme.setChecked(false);
         }
 
-            //SET LISTENER
+        //SET LISTENER FOR SWITCH THEME
         switch_theme.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
                 if (b) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 }
+
+                SharedPreferences.Editor editor = getSharedPreferences("com.pizzaboys.randompizzaapp.THEME", MODE_PRIVATE).edit();
+                editor.putBoolean("THEME", b);
+                editor.apply();
 
                 Toast.makeText(getApplicationContext(), "Theme changed - " +
                                 (b ? switch_theme.getTextOn().toString() : switch_theme.getTextOff().toString()),
