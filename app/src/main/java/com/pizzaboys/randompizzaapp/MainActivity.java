@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        drawer.openDrawer(GravityCompat.START);
+
         //SWITCH_THEME
         MenuItem menuItem = navigationView.getMenu().findItem(R.id.app_bar_switch);
 
@@ -441,12 +443,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         p_show = pizzas.get(item);
 
         if (p_show != null) {
+
             pizza_name = p_show.getName();
 
             TextView textView = findViewById(R.id.textView);
             textView.setText(pizza_name);
 
             Button button_ing = findViewById(R.id.button6);
+            button_ing.setVisibility(View.VISIBLE);
 
             if(p_show.getIngredients().size()==0){
                 button_ing.setEnabled(false);
