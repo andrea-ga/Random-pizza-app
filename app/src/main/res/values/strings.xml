@@ -129,5 +129,12 @@
     <string name="salsiccia_patate">Salsiccia e patate</string>
     <string name="menu_good_pizza">Good Pizza</string>
     <string name="button_show_ingredients">SHOW INGREDIENTS</string>
+    <string name="welcome_title">Three levels of randomization:</string>
+    <string name="welcome_traditional">Randomize traditional pizza</string>
+    <string name="welcome_360">Randomize everything</string>
+    <string name="welcome_good">Randomize everything..but make it good</string>
+    <string name="description_good">Good pizza menu image</string>
+    <string name="description_pizza">Traditional pizza menu image</string>
+    <string name="description_360">360° menu image</string>
 
 </resources>

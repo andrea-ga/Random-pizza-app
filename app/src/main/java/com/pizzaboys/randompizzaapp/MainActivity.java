@@ -2,6 +2,7 @@ package com.pizzaboys.randompizzaapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
@@ -81,13 +82,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         drawer.openDrawer(GravityCompat.START);
 
+        //WELCOME DIALOG
+
+        SharedPreferences welcomePrefs = getSharedPreferences("com.pizzaboys.randompizzaapp.WELCOME", MODE_PRIVATE);
+        boolean welcome_boolean = welcomePrefs.getBoolean("WELCOME", true);
+
+        if(welcome_boolean) {
+
+            SharedPreferences.Editor editor =
+                    getSharedPreferences("com.pizzaboys.randompizzaapp.WELCOME", MODE_PRIVATE).edit();
+            editor.putBoolean("WELCOME", false);
+            editor.apply();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setView(R.layout.welcome_layout);
+
+            builder.show();
+        }
+
+        //END WELCOME DIALOG
+
+
         //SWITCH_THEME
         MenuItem menuItem = navigationView.getMenu().findItem(R.id.app_bar_switch);
 
         switch_theme = menuItem.getActionView().findViewById(R.id.drawer_switch);
 
-        SharedPreferences mPrefs = getSharedPreferences("com.pizzaboys.randompizzaapp.THEME", MODE_PRIVATE);
-        boolean theme_boolean = mPrefs.getBoolean("THEME", theme_dark_default);
+        SharedPreferences themePrefs = getSharedPreferences("com.pizzaboys.randompizzaapp.THEME", MODE_PRIVATE);
+        boolean theme_boolean = themePrefs.getBoolean("THEME", theme_dark_default);
 
         if (theme_boolean) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
