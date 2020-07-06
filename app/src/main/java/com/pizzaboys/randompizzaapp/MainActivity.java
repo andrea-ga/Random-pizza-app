@@ -476,9 +476,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             if(p_show.getIngredients().size()==0){
                 button_ing.setEnabled(false);
+                button_ing.setVisibility(View.INVISIBLE);
             }
             else{
                 button_ing.setEnabled(true);
+                button_ing.setVisibility(View.VISIBLE);
             }
 
 
