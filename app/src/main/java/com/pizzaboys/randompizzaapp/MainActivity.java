@@ -33,6 +33,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -40,13 +42,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Switch switch_theme;
 
     private List<Ingredient> ingredients = new ArrayList<>();
-    private List<Ingredient> filtered_ingredients = new ArrayList<>();
-    private List<Ingredient> good_matches_1 = new ArrayList<>();
-    private List<Ingredient> bad_matches_1 = new ArrayList<>();
-    private List<Ingredient> good_matches_2 = new ArrayList<>();
-    private List<Ingredient> bad_matches_2 = new ArrayList<>();
-    private List<Ingredient> good_matches_3 = new ArrayList<>();
-    private List<Ingredient> bad_matches_3 = new ArrayList<>();
+    private List<Ingredient> removed_ingredients = new ArrayList<>();
+    private int[] num_removed_good = {0, 0, 0, 0}; //FIRST ONE IS FOR THE INGREDIENTS ARRAYLIST
+    private int[] num_removed_bad = {0, 0, 0};
 
     private List<Pizza> pizzas = new ArrayList<>();
 
@@ -87,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SharedPreferences welcomePrefs = getSharedPreferences("com.pizzaboys.randompizzaapp.WELCOME", MODE_PRIVATE);
         boolean welcome_boolean = welcomePrefs.getBoolean("WELCOME", true);
 
-        if(welcome_boolean) {
+        if (welcome_boolean) {
 
             SharedPreferences.Editor editor =
                     getSharedPreferences("com.pizzaboys.randompizzaapp.WELCOME", MODE_PRIVATE).edit();
@@ -294,15 +292,107 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Ingredient basilico = new Ingredient(getString(R.string.basilico), getString(R.string.spezie));
         ingredients.add(basilico);
 
-        filtered_ingredients.addAll(ingredients);
-
         //MATCHES
-        salsiccia.addGoodMatch(patate_lesse);
-        patate_lesse.addGoodMatch(salsiccia);
 
         for (Ingredient i : ingredients) {
-            if (i.getCategory().equals("Pesce")) {
+            for (Ingredient b : ingredients) {
+                if (!i.getCategory().equals("Vegetali") && i.getCategory().equals(b.getCategory())) {
+                    i.addBadMatch(b);
+                } else if (i.getCategory().equals("Salumi") && b.getCategory().equals("Pesce")) {
+                    i.addBadMatch(b);
+                    b.addBadMatch(i);
+                }
+            }
+        }
+
+        speck.addGoodMatch(funghi_champignon);
+        speck.addGoodMatch(funghi_porcini);
+        speck.addGoodMatch(radicchio);
+        speck.addGoodMatch(scamorza_affumicata);
+        speck.addGoodMatch(olive);
+        speck.addGoodMatch(zucchine);
+        speck.addGoodMatch(rucola);
+        speck.addGoodMatch(zucca);
+        speck.addGoodMatch(brie);
+        speck.addGoodMatch(mozzarella_di_bufala);
+        speck.addGoodMatch(burrata);
+
+        for (Ingredient i : ingredients) {
+            if (i.getCategory().equals("Vegetali") ||
+                    i.getCategory().equals("Salse")) {
+                prosciutto_cotto.addGoodMatch(i);
+                i.addGoodMatch(prosciutto_cotto);
+            }
+        }
+
+        prosciutto_crudo.addGoodMatch(funghi_champignon);
+        prosciutto_crudo.addGoodMatch(funghi_porcini);
+        prosciutto_crudo.addGoodMatch(rucola);
+
+        salame_piccante.addGoodMatch(funghi_champignon);
+        salame_piccante.addGoodMatch(funghi_porcini);
+        salame_piccante.addGoodMatch(olive);
+        salame_piccante.addGoodMatch(patate_lesse);
+        salame_piccante.addGoodMatch(cipolla);
+
+        salame_dolce.addGoodMatch(funghi_champignon);
+        salame_dolce.addGoodMatch(funghi_porcini);
+        salame_dolce.addGoodMatch(cipolla);
+
+        salsiccia.addGoodMatch(scamorza_affumicata);
+        salsiccia.addGoodMatch(mozzarella_di_bufala);
+        salsiccia.addGoodMatch(burrata);
+        salsiccia.addGoodMatch(stracciatella);
+        salsiccia.addGoodMatch(funghi_champignon);
+        salsiccia.addGoodMatch(funghi_porcini);
+        salsiccia.addGoodMatch(cipolla);
+        salsiccia.addGoodMatch(patatine_fritte);
+        salsiccia.addGoodMatch(patate_lesse);
+        salsiccia.addGoodMatch(friarelli);
+        salsiccia.addGoodMatch(carciofi);
+
+        nduja.addGoodMatch(salame_dolce);
+        nduja.addGoodMatch(salame_piccante);
+
+        for (Ingredient i : ingredients) {
+            if (i.getCategory().equals("Vegetali") &&
+                    !i.getName().equals("Pomodori secchi")) {
+                nduja.addGoodMatch(i);
+                i.addGoodMatch(nduja);
+            }
+        }
+
+        for (Ingredient i : ingredients) {
+            if (i.getCategory().equals("Formaggi")) {
+                prosciutto_cotto.addGoodMatch(i);
+                i.addGoodMatch(prosciutto_cotto);
+                prosciutto_crudo.addGoodMatch(i);
+                i.addGoodMatch(prosciutto_crudo);
+                salame_piccante.addGoodMatch(i);
+                i.addGoodMatch(salame_piccante);
+                salame_dolce.addGoodMatch(i);
+                i.addGoodMatch(salame_dolce);
+                nduja.addGoodMatch(i);
+                i.addGoodMatch(nduja);
+            }
+        }
+
+        for (Ingredient i : ingredients) {
+            if (i.getCategory().equals("Frutta")) {
+                speck.addBadMatch(i);
+                i.addBadMatch(speck);
+                prosciutto_cotto.addBadMatch(i);
+                i.addBadMatch(prosciutto_cotto);
+                prosciutto_crudo.addBadMatch(i);
+                i.addBadMatch(prosciutto_crudo);
+                salame_piccante.addBadMatch(i);
+                i.addBadMatch(salame_piccante);
+                salame_dolce.addBadMatch(i);
+                i.addBadMatch(salame_dolce);
                 salsiccia.addBadMatch(i);
+                i.addBadMatch(salsiccia);
+                nduja.addBadMatch(i);
+                i.addBadMatch(nduja);
             }
         }
 
@@ -422,6 +512,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Pizza salsiccia_patate = new Pizza(getString(R.string.salsiccia_patate));
         pizzas.add(salsiccia_patate);
+
+        Pizza salsiccia_friarelli = new Pizza(getString(R.string.salsiccia_friarelli));
+        pizzas.add(salsiccia_friarelli);
     }
 
     @Override
@@ -474,11 +567,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Button button_ing = findViewById(R.id.button6);
             button_ing.setVisibility(View.VISIBLE);
 
-            if(p_show.getIngredients().size()==0){
+            if (p_show.getIngredients().size() == 0) {
                 button_ing.setEnabled(false);
                 button_ing.setVisibility(View.INVISIBLE);
-            }
-            else{
+            } else {
                 button_ing.setEnabled(true);
                 button_ing.setVisibility(View.VISIBLE);
             }
@@ -494,57 +586,58 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Ingredient ingredient1, ingredient2, ingredient3, ingredient4;
         String ingredient1_name = "", ingredient2_name = "", ingredient3_name = "", ingredient4_name = "";
 
-        if (ingredients.size() != filtered_ingredients.size()) {
-            filtered_ingredients.clear();
-            filtered_ingredients.addAll(ingredients);
-        }
-
         r1 = new Random();
 
-        createFilteredList(filtered_ingredients);
+        removed_ingredients.clear();
+        createFilteredList(ingredients, 0, true);
 
-        if (filtered_ingredients.size() == 0) {
-            Toast.makeText(getApplicationContext(), "You're gonna eat nothing!\nPlease remove some filters.", Toast.LENGTH_SHORT).show();
+        if (ingredients.size() == 0) {
+            Toast.makeText(getApplicationContext(), R.string.too_many_filters,
+                    Toast.LENGTH_SHORT).show();
         } else {
-            random_number1 = r1.nextInt(filtered_ingredients.size());
-            ingredient1 = filtered_ingredients.get(random_number1);
+            random_number1 = r1.nextInt(ingredients.size());
+            ingredient1 = ingredients.get(random_number1);
             ingredient1_name = ingredient1.getName();
 
-            if (filtered_ingredients.size() >= 2) {
+            if (ingredients.size() >= 2) {
 
                 do {
                     r2 = new Random();
-                    random_number2 = r2.nextInt(filtered_ingredients.size());
+                    random_number2 = r2.nextInt(ingredients.size());
                 } while (random_number2 == random_number1);
 
-                ingredient2 = filtered_ingredients.get(random_number2);
+                ingredient2 = ingredients.get(random_number2);
                 ingredient2_name = ingredient2.getName();
 
-                if (filtered_ingredients.size() >= 3) {
+                if (ingredients.size() >= 3) {
 
                     do {
                         r3 = new Random();
-                        random_number3 = r3.nextInt(filtered_ingredients.size());
+                        random_number3 = r3.nextInt(ingredients.size());
                     } while (random_number3 == random_number1 || random_number3 == random_number2);
 
-                    ingredient3 = filtered_ingredients.get(random_number3);
+                    ingredient3 = ingredients.get(random_number3);
                     ingredient3_name = ingredient3.getName();
 
-                    if (filtered_ingredients.size() >= 4) {
+                    if (ingredients.size() >= 4) {
 
                         do {
                             r4 = new Random();
-                            random_number4 = r4.nextInt(filtered_ingredients.size());
+                            random_number4 = r4.nextInt(ingredients.size());
                         } while (random_number4 == random_number3 || random_number4 == random_number2 ||
                                 random_number4 == random_number1);
 
-                        ingredient4 = filtered_ingredients.get(random_number4);
+                        ingredient4 = ingredients.get(random_number4);
                         ingredient4_name = ingredient4.getName();
                     }
 
                 }
             }
 
+        }
+
+        if (num_removed_good[0] != 0) {
+            ingredients.addAll(removed_ingredients);
         }
 
         TextView textView1 = findViewById(R.id.textView3);
@@ -582,42 +675,59 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Random r1, r2, r3, r4;
         int random_number1, random_number2, random_number3, random_number4;
+
         Ingredient ingredient1, ingredient2 = null, ingredient3 = null, ingredient4 = null;
         String ingredient1_name = "", ingredient2_name = "", ingredient3_name = "", ingredient4_name = "";
         int index = 0;
 
-        if (ingredients.size() != filtered_ingredients.size()) {
-            filtered_ingredients.clear();
-            filtered_ingredients.addAll(ingredients);
-        }
+        Button myButton = findViewById(R.id.button5);
+
+        myButton.setEnabled(false);
+
+        Timer buttonTimer = new Timer();
+        buttonTimer.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        findViewById(R.id.button5).setEnabled(true);
+                    }
+                });
+            }
+        }, 1000);
+
 
         r1 = new Random();
+        r2 = new Random();
+        r3 = new Random();
+        r4 = new Random();
 
-        createFilteredList(filtered_ingredients);
-
+        Arrays.fill(num_removed_good, 0);
+        Arrays.fill(num_removed_bad, 0);
         Arrays.fill(good_pizza_index, -1);
-        good_matches_1.clear();
-        bad_matches_1.clear();
-        good_matches_2.clear();
-        bad_matches_2.clear();
-        good_matches_3.clear();
-        bad_matches_3.clear();
 
-        if (filtered_ingredients.size() == 0) {
-            Toast.makeText(getApplicationContext(), "You're gonna eat nothing!\nPlease remove some filters.",
+        removed_ingredients.clear();
+        createFilteredList(ingredients, 0, true);
+
+        if (ingredients.size() == 0) {
+            Toast.makeText(getApplicationContext(), R.string.too_many_filters,
                     Toast.LENGTH_SHORT).show();
         } else {
 
-            random_number1 = r1.nextInt(filtered_ingredients.size());
-            ingredient1 = filtered_ingredients.get(random_number1);
+            random_number1 = r1.nextInt(ingredients.size());
+            ingredient1 = ingredients.get(random_number1);
             ingredient1_name = ingredient1.getName();
 
             findGoodMatch(ingredient1);
 
-            if (filtered_ingredients.size() >= 2) {
+            if (ingredients.size() >= 2) {
                 if (good_pizza_index[0] != -1) {
                     ingredient2 = ingredient1.getGood_matches().get(good_pizza_index[0]);
                 } else {
+
                     if (ingredient1.getGood_matches().size() != 0) {
 
                         do {
@@ -634,21 +744,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     if (index == ingredient1.getGood_matches().size()) {
 
                         do {
-                            r2 = new Random();
-                            random_number2 = r2.nextInt(filtered_ingredients.size());
-                            ingredient2 = filtered_ingredients.get(random_number2);
+                            random_number2 = r2.nextInt(ingredients.size());
+                            ingredient2 = ingredients.get(random_number2);
                         } while (ingredient2.getName().equals(ingredient1_name));
                     }
+
+
                 }
+                if (ingredient2 != null)
+                    ingredient2_name = ingredient2.getName();
 
-                ingredient2_name = ingredient2.getName();
-
-                if (filtered_ingredients.size() >= 3) {
+                if (ingredients.size() >= 3) {
                     if (good_pizza_index[1] != -1) {
                         ingredient3 = ingredient2.getGood_matches().get(good_pizza_index[1]);
                     } else {
 
                         index = 0;
+
+                        createFilteredList(ingredient2.getGood_matches(), 2, true);
 
                         if (ingredient2.getGood_matches().size() != 0) {
 
@@ -666,22 +779,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         if (index == ingredient2.getGood_matches().size()) {
                             do {
-                                r3 = new Random();
-                                random_number3 = r3.nextInt(filtered_ingredients.size());
-                                ingredient3 = filtered_ingredients.get(random_number3);
+                                random_number3 = r3.nextInt(ingredients.size());
+                                ingredient3 = ingredients.get(random_number3);
                             } while (ingredient3.getName().equals(ingredient2_name) ||
                                     ingredient3.getName().equals(ingredient1_name));
                         }
+
+                        if (num_removed_good[2] != 0) {
+                            for (int i = num_removed_good[0] + num_removed_good[1];
+                                 i < num_removed_good[2] + num_removed_good[1] + num_removed_good[0];
+                                 i++) {
+                                ingredient2.getGood_matches().add(removed_ingredients.get(i));
+                            }
+                        }
+
                     }
+                    if (ingredient3 != null)
+                        ingredient3_name = ingredient3.getName();
 
-                    ingredient3_name = ingredient3.getName();
-
-                    if (filtered_ingredients.size() >= 4) {
+                    if (ingredients.size() >= 4) {
                         if (good_pizza_index[2] != -1) {
                             ingredient4 = ingredient3.getGood_matches().get(good_pizza_index[2]);
                         } else {
 
                             index = 0;
+
+                            createFilteredList(ingredient3.getGood_matches(), 3, true);
 
                             if (ingredient3.getGood_matches().size() != 0) {
 
@@ -700,47 +823,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                             if (index == ingredient3.getGood_matches().size()) {
                                 do {
-                                    r4 = new Random();
-                                    random_number4 = r4.nextInt(filtered_ingredients.size());
-                                    ingredient4 = filtered_ingredients.get(random_number4);
+                                    random_number4 = r4.nextInt(ingredients.size());
+                                    ingredient4 = ingredients.get(random_number4);
                                 } while (ingredient4.getName().equals(ingredient3_name)
                                         || ingredient4.getName().equals(ingredient2_name)
                                         || ingredient4.getName().equals(ingredient1_name));
                             }
+
+                            if (num_removed_good[3] != 0) {
+                                for (int i = num_removed_good[2] + num_removed_good[1] + num_removed_good[0];
+                                     i < num_removed_good[3] + num_removed_good[2] + num_removed_good[1] +
+                                             num_removed_good[0]; i++) {
+                                    ingredient3.getGood_matches().add(removed_ingredients.get(i));
+                                }
+                            }
+
                         }
 
-                        ingredient4_name = ingredient4.getName();
+                        if (ingredient4 != null)
+                            ingredient4_name = ingredient4.getName();
                     }
-
-                    if (good_matches_3.size() != 0 && ingredient3.getGood_matches().size() != good_matches_3.size()) {
-                        ingredient3.getGood_matches().clear();
-                        ingredient3.getGood_matches().addAll(good_matches_3);
-                    }
-                    if (bad_matches_3.size() != 0 && ingredient3.getBad_matches().size() != bad_matches_3.size()) {
-                        ingredient3.getBad_matches().clear();
-                        ingredient3.getBad_matches().addAll(bad_matches_3);
-                    }
-                }
-
-                if (good_matches_2.size() != 0 && ingredient2.getGood_matches().size() != good_matches_2.size()) {
-                    ingredient2.getGood_matches().clear();
-                    ingredient2.getGood_matches().addAll(good_matches_2);
-                }
-                if (bad_matches_2.size() != 0 && ingredient2.getBad_matches().size() != bad_matches_2.size()) {
-                    ingredient2.getBad_matches().clear();
-                    ingredient2.getBad_matches().addAll(bad_matches_2);
                 }
             }
 
-            if (good_matches_1.size() != 0 && ingredient1.getGood_matches().size() != good_matches_1.size()) {
-                ingredient1.getGood_matches().clear();
-                ingredient1.getGood_matches().addAll(good_matches_1);
+            if (num_removed_good[1] != 0) {
+                for (int i = num_removed_good[0];
+                     i < num_removed_good[1] + num_removed_good[0]; i++) {
+                    ingredient1.getGood_matches().add(removed_ingredients.get(i));
+                }
             }
-            if (bad_matches_1.size() != 0 && ingredient1.getBad_matches().size() != bad_matches_1.size()) {
-                ingredient1.getBad_matches().clear();
-                ingredient1.getBad_matches().addAll(bad_matches_1);
+            if (num_removed_bad[0] != 0) {
+                for (int i = 0; i < num_removed_bad[0]; i++) {
+                    ingredient1.getBad_matches().add(removed_ingredients.get(i));
+                }
             }
 
+        }
+
+        if (num_removed_good[0] != 0) {
+            for (int i = 0; i < num_removed_good[0]; i++) {
+                ingredients.add(removed_ingredients.get(i));
+            }
         }
 
 
@@ -758,16 +881,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (radioGroup.getCheckedRadioButtonId()) {
             case R.id.radio_4:
-                if (filtered_ingredients.size() >= 4)
+                if (ingredients.size() >= 4)
                     textView4.setText(ingredient4_name);
             case R.id.radio_3:
-                if (filtered_ingredients.size() >= 3)
+                if (ingredients.size() >= 3)
                     textView3.setText(ingredient3_name);
             case R.id.radio_2:
-                if (filtered_ingredients.size() >= 2)
+                if (ingredients.size() >= 2)
                     textView2.setText(ingredient2_name);
             case R.id.radio_1:
-                if (filtered_ingredients.size() >= 1)
+                if (ingredients.size() >= 1)
                     textView1.setText(ingredient1_name);
                 break;
         }
@@ -779,13 +902,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Ingredient ingredient2, ingredient3;
         int i2, i3, i4;
 
-        good_matches_1.addAll(ingredient1.getGood_matches());
-        bad_matches_1.addAll(ingredient1.getBad_matches());
+        createFilteredList(ingredient1.getGood_matches(), 1, true);
+        createFilteredList(ingredient1.getBad_matches(), 0, false);
 
-        createFilteredList(ingredient1.getGood_matches());
-        createFilteredList(ingredient1.getBad_matches());
-
-        if (filtered_ingredients.size() >= 2 && ingredient1.getGood_matches().size() != 0) {
+        if (ingredients.size() >= 2 && ingredient1.getGood_matches().size() != 0) {
             for (i2 = 0; !found && i2 < ingredient1.getGood_matches().size(); i2++) {
 
                 if (ingredient1.getGood_matches().get(i2).getName().equals(ingredient1.getName()))
@@ -794,13 +914,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 ingredient2 = ingredient1.getGood_matches().get(i2);
                 good_pizza_index[0] = i2;
 
-                good_matches_2.addAll(ingredient2.getGood_matches());
-                bad_matches_2.addAll(ingredient2.getBad_matches());
+                createFilteredList(ingredient2.getGood_matches(), 2, true);
+                createFilteredList(ingredient2.getBad_matches(), 1, false);
 
-                createFilteredList(ingredient2.getGood_matches());
-                createFilteredList(ingredient2.getBad_matches());
-
-                if (filtered_ingredients.size() >= 3 && ingredient2.getGood_matches().size() != 0) {
+                if (ingredients.size() >= 3 && ingredient2.getGood_matches().size() != 0) {
                     for (i3 = 0; !found && i3 < ingredient2.getGood_matches().size(); i3++) {
 
                         if (ingredient2.getGood_matches().get(i3).getName().equals(ingredient2.getName()) ||
@@ -809,11 +926,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         ingredient3 = ingredient2.getGood_matches().get(i3);
 
-                        good_matches_3.addAll(ingredient3.getGood_matches());
-                        good_matches_3.addAll(ingredient3.getBad_matches());
-
-                        createFilteredList(ingredient3.getGood_matches());
-                        createFilteredList(ingredient3.getBad_matches());
+                        createFilteredList(ingredient3.getGood_matches(), 3, true);
+                        createFilteredList(ingredient3.getBad_matches(), 2, false);
 
                         for (Ingredient in1 : ingredient1.getBad_matches()) {
                             if (in1.getName().equals(ingredient3.getName())) {
@@ -852,45 +966,163 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 }
                             }
                         }
+
+                        if (num_removed_good[3] != 0) {
+                            Iterator<Ingredient> iterator = removed_ingredients.iterator();
+                            Ingredient ingredient;
+                            int i = 0;
+
+                            while(i <num_removed_good[2] + num_removed_good[1] + num_removed_good[0]){
+                                iterator.next();
+                                i++;
+                            }
+
+                            for (; i < num_removed_good[3] + num_removed_good[2] + num_removed_good[1] +
+                                    num_removed_good[0]; i++) {
+
+                                ingredient = iterator.next();
+                                ingredient3.getGood_matches().add(ingredient);
+                                iterator.remove();
+                            }
+                        }
+
+                        if (num_removed_bad[2] != 0) {
+                            Iterator<Ingredient> iterator = removed_ingredients.iterator();
+                            Ingredient ingredient;
+                            int i = 0;
+
+                            while(i < num_removed_bad[1] + num_removed_bad[0]){
+                                iterator.next();
+                                i++;
+                            }
+
+                            for (; i < num_removed_bad[2] + num_removed_bad[1] + num_removed_bad[0];
+                                 i++) {
+
+                                ingredient = iterator.next();
+                                ingredient3.getBad_matches().add(ingredient);
+                                iterator.remove();
+                            }
+                        }
+
+                        num_removed_good[3] = 0;
+                        num_removed_bad[2] = 0;
+
                     }
                 }
+
+                if (num_removed_good[2] != 0) {
+                    Iterator<Ingredient> iterator = removed_ingredients.iterator();
+                    Ingredient ingredient;
+                    int i = 0;
+
+                    while(i < num_removed_good[1] + num_removed_good[0]){
+                        iterator.next();
+                        i++;
+                    }
+
+                    for (; i < num_removed_good[2] + num_removed_good[1] + num_removed_good[0]; i++) {
+
+                        ingredient = iterator.next();
+                        ingredient2.getGood_matches().add(ingredient);
+                        iterator.remove();
+                    }
+                }
+
+
+                if (num_removed_bad[1] != 0) {
+                    Iterator<Ingredient> iterator = removed_ingredients.iterator();
+                    Ingredient ingredient;
+                    int i = 0;
+
+                    while(i < num_removed_bad[0]){
+                        iterator.next();
+                        i++;
+                    }
+
+                    for (; i < num_removed_bad[1] + num_removed_bad[0]; i++) {
+
+                        ingredient = iterator.next();
+                        ingredient2.getBad_matches().add(ingredient);
+                        iterator.remove();
+                    }
+                }
+
+                num_removed_good[2] = 0;
+                num_removed_bad[1] = 0;
+
             }
         }
 
     }
 
-    public void createFilteredList(List<Ingredient> filt_ingredients) {
+    public void createFilteredList(List<Ingredient> filtered_ingredients, int number, boolean good) {
 
         if (filters[0] || filters[1] || filters[2] || filters[3] || filters[4] || filters[5] || filters[6]) {
-            for (Iterator<Ingredient> iterator = filt_ingredients.iterator(); iterator.hasNext(); ) {
+            for (Iterator<Ingredient> iterator = filtered_ingredients.iterator(); iterator.hasNext(); ) {
                 Ingredient ingredient = iterator.next();
 
                 if (filters[0] && ingredient.getCategory() != null
                         && ingredient.getCategory().equals(getString(R.string.vegetali))) {
+                    removed_ingredients.add(ingredient);
+                    if (good)
+                        num_removed_good[number]++;
+                    else
+                        num_removed_bad[number]++;
                     iterator.remove();
                 }
                 if (filters[1] && ingredient.getCategory() != null
                         && ingredient.getCategory().equals(getString(R.string.pesce))) {
+                    removed_ingredients.add(ingredient);
+                    if (good)
+                        num_removed_good[number]++;
+                    else
+                        num_removed_bad[number]++;
                     iterator.remove();
                 }
                 if (filters[2] && ingredient.getCategory() != null
                         && ingredient.getCategory().equals(getString(R.string.formaggi))) {
+                    removed_ingredients.add(ingredient);
+                    if (good)
+                        num_removed_good[number]++;
+                    else
+                        num_removed_bad[number]++;
                     iterator.remove();
                 }
                 if (filters[3] && ingredient.getCategory() != null
                         && ingredient.getCategory().equals(getString(R.string.salumi))) {
+                    removed_ingredients.add(ingredient);
+                    if (good)
+                        num_removed_good[number]++;
+                    else
+                        num_removed_bad[number]++;
                     iterator.remove();
                 }
                 if (filters[4] && ingredient.getCategory() != null
                         && ingredient.getCategory().equals(getString(R.string.salse))) {
+                    removed_ingredients.add(ingredient);
+                    if (good)
+                        num_removed_good[number]++;
+                    else
+                        num_removed_bad[number]++;
                     iterator.remove();
                 }
                 if (filters[5] && ingredient.getCategory() != null
                         && ingredient.getCategory().equals(getString(R.string.frutta))) {
+                    removed_ingredients.add(ingredient);
+                    if (good)
+                        num_removed_good[number]++;
+                    else
+                        num_removed_bad[number]++;
                     iterator.remove();
                 }
                 if (filters[6] && ingredient.getCategory() != null
                         && ingredient.getCategory().equals(getString(R.string.spezie))) {
+                    removed_ingredients.add(ingredient);
+                    if (good)
+                        num_removed_good[number]++;
+                    else
+                        num_removed_bad[number]++;
                     iterator.remove();
                 }
             }
@@ -950,7 +1182,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    public void filtersPopUp2(View view){
+    public void filtersPopUp2(View view) {
         View popupView = getLayoutInflater().inflate(R.layout.popup_layout_2,
                 new LinearLayout(getApplicationContext()), false);
 
@@ -963,8 +1195,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TextView textView_pizza = findViewById(R.id.textView);
         p_show_name = textView_pizza.getText().toString();
 
-        for(Pizza p : pizzas){
-            if(p.getName().equals(p_show_name)){
+        for (Pizza p : pizzas) {
+            if (p.getName().equals(p_show_name)) {
                 p_show = p;
                 break;
             }
@@ -982,7 +1214,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         textView4.setText("");
 
 
-        if(p_show!=null) {
+        if (p_show != null) {
             switch (p_show.getIngredients().size()) {
                 case 4:
                     textView4.setText(p_show.getIngredients().get(3).getName());
