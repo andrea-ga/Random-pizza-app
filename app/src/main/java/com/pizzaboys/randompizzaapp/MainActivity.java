@@ -16,6 +16,8 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.Transformation;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -53,6 +55,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             filter_frutta, filter_spezie;
 
     private int[] good_pizza_index = {-1, -1, -1};
+
+    Animation namesAnimation;
+    TextView pizzaText, ingredientText1, ingredientText2, ingredientText3, ingredientText4;
+    TextView animationText1, animationText2, animationText3, animationText4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -549,23 +555,74 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    public String[] pizzaNames(List<Pizza> pList) {
+        String[] names = new String[pList.size()/2];
+        int i = 0;
+
+        for (Pizza p : pList) {
+            names[i++] = p.getName();
+
+            if(i == names.length)
+                break;
+        }
+
+        return names;
+    }
+
     public void generatePizza(View view) {
         Pizza p_show;
+        int pizza_index;
         String pizza_name;
-        int size = pizzas.size();
-        int item = new Random().nextInt(size);
 
-        p_show = pizzas.get(item);
+        animationText1 = findViewById(R.id.textView20);
+        final String[] animationStrings = pizzaNames(pizzas);
+
+        namesAnimation = new Animation() {
+
+            @Override
+            protected void applyTransformation(float interpolatedTime, Transformation t) {
+                int index = (int) Math.floor(animationStrings.length * interpolatedTime);
+                index = index == animationStrings.length ? index - 1 : index;
+                animationText1.setText(animationStrings[index]);
+            }
+        };
+
+        namesAnimation.setDuration(1000);
+
+        namesAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                pizzaText.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                namesAnimation.cancel();
+                animationText1.setAnimation(null);
+                animationText1.setVisibility(View.INVISIBLE);
+                pizzaText.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        animationText1.startAnimation(namesAnimation);
+
+        pizza_index = new Random().nextInt(pizzas.size() - 1);
+
+        p_show = pizzas.get(pizza_index);
 
         if (p_show != null) {
 
             pizza_name = p_show.getName();
 
-            TextView textView = findViewById(R.id.textView);
-            textView.setText(pizza_name);
+            pizzaText = findViewById(R.id.textView);
+            pizzaText.setText(pizza_name);
 
             Button button_ing = findViewById(R.id.button6);
-            button_ing.setVisibility(View.VISIBLE);
 
             if (p_show.getIngredients().size() == 0) {
                 button_ing.setEnabled(false);
@@ -580,11 +637,74 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    public String[] ingredientNames(List<Ingredient> iList) {
+        String[] names = new String[iList.size()/4];
+        int i = 0;
+
+        for (Ingredient in : iList) {
+            names[i++] = in.getName();
+
+            if(i == names.length)
+                break;
+        }
+
+        return names;
+    }
+
     public void generate360(View view) {
         Random r1, r2, r3, r4;
         int random_number1 = -1, random_number2 = -1, random_number3 = -1, random_number4 = -1;
         Ingredient ingredient1, ingredient2, ingredient3, ingredient4;
         String ingredient1_name = "", ingredient2_name = "", ingredient3_name = "", ingredient4_name = "";
+
+        final String[] animationStrings = ingredientNames(ingredients);
+
+        namesAnimation = new Animation() {
+
+            @Override
+            protected void applyTransformation(float interpolatedTime, Transformation t) {
+                int index = (int) Math.floor(animationStrings.length * interpolatedTime);
+                index = index == animationStrings.length ? index - 1 : index;
+                animationText1.setText(animationStrings[index]);
+                animationText2.setText(animationStrings[index]);
+                animationText3.setText(animationStrings[index]);
+                animationText4.setText(animationStrings[index]);
+            }
+        };
+
+        namesAnimation.setDuration(1000);
+
+        namesAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                ingredientText1.setVisibility(View.INVISIBLE);
+                ingredientText2.setVisibility(View.INVISIBLE);
+                ingredientText3.setVisibility(View.INVISIBLE);
+                ingredientText4.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                namesAnimation.cancel();
+                animationText1.setAnimation(null);
+                animationText1.setVisibility(View.INVISIBLE);
+                animationText2.setAnimation(null);
+                animationText2.setVisibility(View.INVISIBLE);
+                animationText3.setAnimation(null);
+                animationText3.setVisibility(View.INVISIBLE);
+                animationText4.setAnimation(null);
+                animationText4.setVisibility(View.INVISIBLE);
+                ingredientText1.setVisibility(View.VISIBLE);
+                ingredientText2.setVisibility(View.VISIBLE);
+                ingredientText3.setVisibility(View.VISIBLE);
+                ingredientText4.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
 
         r1 = new Random();
 
@@ -640,32 +760,52 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ingredients.addAll(removed_ingredients);
         }
 
-        TextView textView1 = findViewById(R.id.textView3);
-        TextView textView2 = findViewById(R.id.textView4);
-        TextView textView3 = findViewById(R.id.textView5);
-        TextView textView4 = findViewById(R.id.textView6);
+        animationText1 = findViewById(R.id.textView21);
+        animationText1.setVisibility(View.INVISIBLE);
+        animationText2 = findViewById(R.id.textView22);
+        animationText2.setVisibility(View.INVISIBLE);
+        animationText3 = findViewById(R.id.textView23);
+        animationText3.setVisibility(View.INVISIBLE);
+        animationText4 = findViewById(R.id.textView24);
+        animationText4.setVisibility(View.INVISIBLE);
 
-        textView1.setText("");
-        textView2.setText("");
-        textView3.setText("");
-        textView4.setText("");
+        ingredientText1 = findViewById(R.id.textView3);
+        ingredientText2 = findViewById(R.id.textView4);
+        ingredientText3 = findViewById(R.id.textView5);
+        ingredientText4 = findViewById(R.id.textView6);
+
+        ingredientText1.setText("");
+        ingredientText2.setText("");
+        ingredientText3.setText("");
+        ingredientText4.setText("");
 
         RadioGroup radioGroup = findViewById(R.id.radio_group);
 
         switch (radioGroup.getCheckedRadioButtonId()) {
             case R.id.radio_4:
-                if (random_number4 != -1)
-                    textView4.setText(ingredient4_name);
+                if (random_number4 != -1) {
+                    animationText4.setVisibility(View.VISIBLE);
+                    animationText4.startAnimation(namesAnimation);
+                    ingredientText4.setText(ingredient4_name);
+                }
             case R.id.radio_3:
-                if (random_number3 != -1)
-                    textView3.setText(ingredient3_name);
+                if (random_number3 != -1) {
+                    animationText3.setVisibility(View.VISIBLE);
+                    animationText3.startAnimation(namesAnimation);
+                    ingredientText3.setText(ingredient3_name);
+                }
             case R.id.radio_2:
-                if (random_number2 != -1)
-                    textView2.setText(ingredient2_name);
+                if (random_number2 != -1) {
+                    animationText2.setVisibility(View.VISIBLE);
+                    animationText2.startAnimation(namesAnimation);
+                    ingredientText2.setText(ingredient2_name);
+                }
             case R.id.radio_1:
-                if (random_number1 != -1)
-                    textView1.setText(ingredient1_name);
-                break;
+                if (random_number1 != -1) {
+                    animationText1.setVisibility(View.VISIBLE);
+                    animationText1.startAnimation(namesAnimation);
+                    ingredientText1.setText(ingredient1_name);
+                }
         }
 
 
@@ -699,6 +839,54 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }, 1000);
 
+        final String[] animationStrings = ingredientNames(ingredients);
+
+        namesAnimation = new Animation() {
+
+            @Override
+            protected void applyTransformation(float interpolatedTime, Transformation t) {
+                int index = (int) Math.floor(animationStrings.length * interpolatedTime);
+                index = index == animationStrings.length ? index - 1 : index;
+                animationText1.setText(animationStrings[index]);
+                animationText2.setText(animationStrings[index]);
+                animationText3.setText(animationStrings[index]);
+                animationText4.setText(animationStrings[index]);
+            }
+        };
+
+        namesAnimation.setDuration(1000);
+
+        namesAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                ingredientText1.setVisibility(View.INVISIBLE);
+                ingredientText2.setVisibility(View.INVISIBLE);
+                ingredientText3.setVisibility(View.INVISIBLE);
+                ingredientText4.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                namesAnimation.cancel();
+                animationText1.setAnimation(null);
+                animationText1.setVisibility(View.INVISIBLE);
+                animationText2.setAnimation(null);
+                animationText2.setVisibility(View.INVISIBLE);
+                animationText3.setAnimation(null);
+                animationText3.setVisibility(View.INVISIBLE);
+                animationText4.setAnimation(null);
+                animationText4.setVisibility(View.INVISIBLE);
+                ingredientText1.setVisibility(View.VISIBLE);
+                ingredientText2.setVisibility(View.VISIBLE);
+                ingredientText3.setVisibility(View.VISIBLE);
+                ingredientText4.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
 
         r1 = new Random();
         r2 = new Random();
@@ -866,33 +1054,52 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
 
+        animationText1 = findViewById(R.id.textView25);
+        animationText1.setVisibility(View.INVISIBLE);
+        animationText2 = findViewById(R.id.textView26);
+        animationText2.setVisibility(View.INVISIBLE);
+        animationText3 = findViewById(R.id.textView27);
+        animationText3.setVisibility(View.INVISIBLE);
+        animationText4 = findViewById(R.id.textView28);
+        animationText4.setVisibility(View.INVISIBLE);
 
-        TextView textView1 = findViewById(R.id.textView12);
-        TextView textView2 = findViewById(R.id.textView13);
-        TextView textView3 = findViewById(R.id.textView14);
-        TextView textView4 = findViewById(R.id.textView15);
+        ingredientText1 = findViewById(R.id.textView12);
+        ingredientText2 = findViewById(R.id.textView13);
+        ingredientText3 = findViewById(R.id.textView14);
+        ingredientText4 = findViewById(R.id.textView15);
 
-        textView1.setText("");
-        textView2.setText("");
-        textView3.setText("");
-        textView4.setText("");
+        ingredientText1.setText("");
+        ingredientText2.setText("");
+        ingredientText3.setText("");
+        ingredientText4.setText("");
 
         RadioGroup radioGroup = findViewById(R.id.radio_group);
 
         switch (radioGroup.getCheckedRadioButtonId()) {
             case R.id.radio_4:
-                if (ingredients.size() >= 4)
-                    textView4.setText(ingredient4_name);
+                if (ingredients.size() >= 4) {
+                    animationText4.setVisibility(View.VISIBLE);
+                    animationText4.startAnimation(namesAnimation);
+                    ingredientText4.setText(ingredient4_name);
+                }
             case R.id.radio_3:
-                if (ingredients.size() >= 3)
-                    textView3.setText(ingredient3_name);
+                if (ingredients.size() >= 3) {
+                    animationText3.setVisibility(View.VISIBLE);
+                    animationText3.startAnimation(namesAnimation);
+                    ingredientText3.setText(ingredient3_name);
+                }
             case R.id.radio_2:
-                if (ingredients.size() >= 2)
-                    textView2.setText(ingredient2_name);
+                if (ingredients.size() >= 2) {
+                    animationText2.setVisibility(View.VISIBLE);
+                    animationText2.startAnimation(namesAnimation);
+                    ingredientText2.setText(ingredient2_name);
+                }
             case R.id.radio_1:
-                if (ingredients.size() >= 1)
-                    textView1.setText(ingredient1_name);
-                break;
+                if (ingredients.size() >= 1) {
+                    animationText1.setVisibility(View.VISIBLE);
+                    animationText1.startAnimation(namesAnimation);
+                    ingredientText1.setText(ingredient1_name);
+                }
         }
 
     }
@@ -972,7 +1179,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Ingredient ingredient;
                             int i = 0;
 
-                            while(i <num_removed_good[2] + num_removed_good[1] + num_removed_good[0]){
+                            while (i < num_removed_good[2] + num_removed_good[1] + num_removed_good[0]) {
                                 iterator.next();
                                 i++;
                             }
@@ -991,7 +1198,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Ingredient ingredient;
                             int i = 0;
 
-                            while(i < num_removed_bad[1] + num_removed_bad[0]){
+                            while (i < num_removed_bad[1] + num_removed_bad[0]) {
                                 iterator.next();
                                 i++;
                             }
@@ -1016,7 +1223,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Ingredient ingredient;
                     int i = 0;
 
-                    while(i < num_removed_good[1] + num_removed_good[0]){
+                    while (i < num_removed_good[1] + num_removed_good[0]) {
                         iterator.next();
                         i++;
                     }
@@ -1035,7 +1242,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Ingredient ingredient;
                     int i = 0;
 
-                    while(i < num_removed_bad[0]){
+                    while (i < num_removed_bad[0]) {
                         iterator.next();
                         i++;
                     }
