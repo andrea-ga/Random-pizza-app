@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="176dp"
-    android:background="@color/colorAccent"
+    android:background="@drawable/pattern_giusto"
+    android:baselineAligned="true"
     android:gravity="bottom"
     android:padding="16dp"
     android:orientation="vertical">
@@ -15,5 +16,6 @@
         android:layout_height="80dp"
         android:contentDescription="@string/logo_description"
         android:src="@mipmap/ic_launcher_round" />
+
 
 </LinearLayout>

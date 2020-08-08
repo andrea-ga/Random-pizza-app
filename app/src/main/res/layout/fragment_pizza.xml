@@ -65,6 +65,7 @@
         android:enabled="false"
         android:onClick="filtersPopUp2"
         android:text="@string/button_show_ingredients"
+        android:textColor="@color/onAccent"
         android:visibility="invisible"
         app:backgroundTint="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"

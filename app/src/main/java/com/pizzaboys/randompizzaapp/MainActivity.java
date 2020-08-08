@@ -56,9 +56,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private int[] good_pizza_index = {-1, -1, -1};
 
-    Animation namesAnimation;
-    TextView pizzaText, ingredientText1, ingredientText2, ingredientText3, ingredientText4;
-    TextView animationText1, animationText2, animationText3, animationText4;
+    private Animation namesAnimation;
+    private TextView pizzaText, ingredientText1, ingredientText2, ingredientText3, ingredientText4;
+    private TextView animationText1, animationText2, animationText3, animationText4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 editor.putBoolean("THEME", b);
                 editor.apply();
 
-                Toast.makeText(getApplicationContext(), "Theme changed - " +
+                Toast.makeText(getApplicationContext(), getString(R.string.theme_changed) + " - " +
                                 (b ? switch_theme.getTextOn().toString() : switch_theme.getTextOff().toString()),
                         Toast.LENGTH_SHORT).show();
             }

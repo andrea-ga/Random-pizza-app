@@ -206,6 +206,7 @@
         android:layout_marginLeft="40dp"
         android:onClick="filtersPopUp"
         android:text="@string/filter_add"
+        android:textColor="@color/onAccent"
         app:backgroundTint="@color/colorAccent"
         app:layout_constraintBaseline_toBaselineOf="@+id/button5"
         app:layout_constraintStart_toEndOf="@+id/radio_wrapper" />
