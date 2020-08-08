@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Random Pizza App</string>
-    <string name="menu_traditional">Pizze Classiche</string>
+    <string name="menu_traditional">Pizza Classica</string>
     <string name="menu_360">Random 360°</string>
     <string name="menu_message">Pizza is Awesome !!</string>
     <string name="menu_settings">Impostazioni</string>
@@ -136,7 +136,8 @@
     <string name="welcome_360">Randomizza tutto</string>
     <string name="welcome_good">Randomizza tutto..ma rendilo buono</string>
     <string name="description_good">Immagine del menu Pizza buona</string>
-    <string name="description_pizza">Imaggine del menu Pizze classiche</string>
+    <string name="description_pizza">Immaggine del menu Pizze classiche</string>
     <string name="description_360">Immagine del menu 360°</string>
     <string name="too_many_filters">Non mangerai nulla!\nRimuovi qualche filtro.</string>
+    <string name="theme_changed">Tema modificato</string>
 </resources>
