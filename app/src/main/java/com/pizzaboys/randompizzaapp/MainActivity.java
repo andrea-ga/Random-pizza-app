@@ -421,6 +421,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         pizzas.add(boscaiola);
 
         Pizza quattro_formaggi = new Pizza(getString(R.string.quattro_formaggi));
+        quattro_formaggi.addIngredient(gorgonzola);
+        quattro_formaggi.addIngredient(fontina);
+        quattro_formaggi.addIngredient(parmigiano);
         pizzas.add(quattro_formaggi);
 
         Pizza quattro_stagioni = new Pizza(getString(R.string.quattro_stagioni));
@@ -430,10 +433,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         quattro_stagioni.addIngredient(carciofi);
         pizzas.add(quattro_stagioni);
 
+        Pizza capricciosa = new Pizza(getString(R.string.capricciosa));
+        capricciosa.addIngredient(prosciutto_cotto);
+        capricciosa.addIngredient(olive);
+        capricciosa.addIngredient(funghi_champignon);
+        capricciosa.addIngredient(carciofi);
+        pizzas.add(capricciosa);
+
         Pizza tonno_cipolla = new Pizza(getString(R.string.tonno_cipolla));
+        tonno_cipolla.addIngredient(tonno);
+        tonno_cipolla.addIngredient(cipolla);
         pizzas.add(tonno_cipolla);
 
         Pizza vegetariana = new Pizza(getString(R.string.vegetariana));
+        vegetariana.addIngredient(melanzane);
+        vegetariana.addIngredient(peperoni);
+        vegetariana.addIngredient(zucchine);
+        vegetariana.addIngredient(pomodorini);
         pizzas.add(vegetariana);
 
         Pizza parmigiana = new Pizza(getString(R.string.parmigiana));
@@ -466,6 +482,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         pizzas.add(napoli);
 
         Pizza prosciutto_funghi = new Pizza(getString(R.string.prosciutto_funghi));
+        prosciutto_funghi.addIngredient(prosciutto_cotto);
+        prosciutto_funghi.addIngredient(funghi_champignon);
         pizzas.add(prosciutto_funghi);
 
         Pizza monzese = new Pizza(getString(R.string.monzese));
@@ -492,6 +510,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         pizzas.add(calzone_farcito);
 
         Pizza pizza_frutti_di_mare = new Pizza(getString(R.string.pizza_frutti_di_mare));
+        pizza_frutti_di_mare.addIngredient(frutti_di_mare);
         pizzas.add(pizza_frutti_di_mare);
 
         Pizza bismarck = new Pizza(getString(R.string.bismarck));
@@ -514,12 +533,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         pizzas.add(primavera);
 
         Pizza speck_zola = new Pizza(getString(R.string.speck_zola));
+        speck_zola.addIngredient(speck);
+        speck_zola.addIngredient(gorgonzola);
         pizzas.add(speck_zola);
 
         Pizza salsiccia_patate = new Pizza(getString(R.string.salsiccia_patate));
+        salsiccia_patate.addIngredient(salsiccia);
+        salsiccia_patate.addIngredient(patate_lesse);
         pizzas.add(salsiccia_patate);
 
         Pizza salsiccia_friarelli = new Pizza(getString(R.string.salsiccia_friarelli));
+        salsiccia_friarelli.addIngredient(salsiccia);
+        salsiccia_friarelli.addIngredient(friarelli);
         pizzas.add(salsiccia_friarelli);
     }
 
