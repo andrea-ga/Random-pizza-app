@@ -9,7 +9,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -161,10 +160,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         MenuItem menuItem2 = navigationView.getMenu().findItem(R.id.app_bar_switch2);
         switch_lang = menuItem2.getActionView().findViewById(R.id.drawer_switch2);
 
-        if(lang_value.equalsIgnoreCase("it")){
-            switch_lang.setChecked(true);
-        } else{
-            switch_lang.setChecked(false);
+        if(lang_value!=null) {
+            if (lang_value.equalsIgnoreCase("it")) {
+                switch_lang.setChecked(true);
+            } else {
+                switch_lang.setChecked(false);
+            }
         }
 
         //SET LISTENER FOR SWITCH LANG
