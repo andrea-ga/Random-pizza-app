@@ -9,9 +9,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +39,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -41,7 +47,7 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
-    private Switch switch_theme;
+    private Switch switch_theme, switch_lang;
 
     private List<Ingredient> ingredients = new ArrayList<>();
     private List<Ingredient> removed_ingredients = new ArrayList<>();
@@ -63,6 +69,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //CHANGE LANGUAGE
+        SharedPreferences langPrefs = getSharedPreferences("com.pizzaboys.randompizzaapp.LANG", MODE_PRIVATE);
+        String lang_value = langPrefs.getString("LANG", Locale.getDefault().getLanguage());
+        if(lang_value!=null)
+            setAppLocale(lang_value);
+        //END CHANGE LANGUAGE
         setContentView(R.layout.activity_main);
 
         boolean theme_dark_default = false;
@@ -109,7 +121,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //SWITCH_THEME
         MenuItem menuItem = navigationView.getMenu().findItem(R.id.app_bar_switch);
-
         switch_theme = menuItem.getActionView().findViewById(R.id.drawer_switch);
 
         SharedPreferences themePrefs = getSharedPreferences("com.pizzaboys.randompizzaapp.THEME", MODE_PRIVATE);
@@ -146,6 +157,48 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
         //END SWITCH_THEME
 
+        //SWITCH_LANG
+        MenuItem menuItem2 = navigationView.getMenu().findItem(R.id.app_bar_switch2);
+        switch_lang = menuItem2.getActionView().findViewById(R.id.drawer_switch2);
+
+        if(lang_value.equalsIgnoreCase("it")){
+            switch_lang.setChecked(true);
+        } else{
+            switch_lang.setChecked(false);
+        }
+
+        //SET LISTENER FOR SWITCH LANG
+        switch_lang.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                String lang;
+
+                if (b) {
+                    lang = "it";
+                } else {
+                    lang = "en";
+                }
+
+                setAppLocale(lang);
+
+                SharedPreferences.Editor editor =
+                        getSharedPreferences("com.pizzaboys.randompizzaapp.LANG", MODE_PRIVATE).edit();
+                editor.putString("LANG", lang);
+                editor.apply();
+
+                recreate();
+                /*Intent intent = getIntent();
+                finish();
+                startActivity(intent);*/
+
+                Toast.makeText(getApplicationContext(), getString(R.string.lang_changed) + " - " +
+                                (b ? switch_lang.getTextOn().toString() : switch_lang.getTextOff().toString()),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+        //END SWITCH_LANG
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new PizzaFragment()).commit();
@@ -155,6 +208,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         createAllList();
 
+    }
+
+    public void setAppLocale(String localeCode){
+        Resources resources = getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        Configuration config = resources.getConfiguration();
+
+        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.JELLY_BEAN_MR1){
+            config.setLocale(new Locale(localeCode.toLowerCase()));
+        } else {
+            config.locale = new Locale(localeCode.toLowerCase());
+        }
+
+        resources.updateConfiguration(config, dm);
     }
 
     public void createAllList() {
@@ -737,7 +804,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         createFilteredList(ingredients, 0, true);
 
         if (ingredients.size() == 0) {
-            Toast.makeText(getApplicationContext(), R.string.too_many_filters,
+            Toast.makeText(getApplicationContext(), getString(R.string.too_many_filters),
                     Toast.LENGTH_SHORT).show();
         } else {
             random_number1 = r1.nextInt(ingredients.size());
@@ -926,7 +993,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         createFilteredList(ingredients, 0, true);
 
         if (ingredients.size() == 0) {
-            Toast.makeText(getApplicationContext(), R.string.too_many_filters,
+            Toast.makeText(getApplicationContext(), getString(R.string.too_many_filters),
                     Toast.LENGTH_SHORT).show();
         } else {
 

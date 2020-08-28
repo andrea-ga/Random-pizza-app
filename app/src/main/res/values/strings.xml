@@ -140,4 +140,8 @@
     <string name="description_360">360° menu image</string>
     <string name="too_many_filters">You\'re gonna eat nothing!\nPlease remove some filters.</string>
     <string name="theme_changed">Theme changed</string>
+    <string name="lang_changed">Language changed</string>
+    <string name="english">ENG</string>
+    <string name="italian">ITA</string>
+    <string name="menu_ita_language">Italian</string>
 </resources>

@@ -141,4 +141,8 @@
     <string name="description_360">Immagine del menu 360°</string>
     <string name="too_many_filters">Non mangerai nulla!\nRimuovi qualche filtro.</string>
     <string name="theme_changed">Tema modificato</string>
+    <string name="lang_changed">Lingua modificata</string>
+    <string name="english">ENG</string>
+    <string name="italian">ITA</string>
+    <string name="menu_ita_language">Italiano</string>
 </resources>
